@@ -23,10 +23,8 @@ const PHOTOS_ALL = ['https://assets.htmlacademy.ru/content/intensive/javascript-
 const SIMILAR_ADS_COUNT = 10;
 
 const NUMBERS = new Array(SIMILAR_ADS_COUNT).fill(0);
-for (let item = 0; item < NUMBERS.length; item++){
-  NUMBERS[item] = item+1;
-}
-const AVATARS_ARRAY = NUMBERS.map((element) => `img/avatars/user${(`0${element}`).slice(-2)}.png`);
+
+const AVATARS_ARRAY = NUMBERS.map((element, index) => `img/avatars/user${(`0${index+1}`).slice(-2)}.png`);
 
 function getUniqueElement(argument) {
   const ONE_AVATAR = argument[0];
@@ -47,7 +45,7 @@ const createAd = () => {
     .map((item, index) => PHOTOS_ALL[index]);
 
   return {
-    author: AVATAR,
+    author: {avatar: AVATAR},
     offer: {
       title: 'Место для чила',
       address: `${LOCATION_RANDOM.lat}, ${LOCATION_RANDOM.lng}`,
@@ -60,7 +58,10 @@ const createAd = () => {
       description: 'место для уютного отдыха',
       photos: PHOTOS_RANDOM,
     },
-    location: LOCATION_RANDOM,
+    location: {
+      lat: LOCATION_RANDOM.lat,
+      lng: LOCATION_RANDOM.lng,
+    },
   };
 };
 
