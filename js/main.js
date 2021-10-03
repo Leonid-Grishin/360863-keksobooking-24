@@ -64,5 +64,7 @@ const createAd = () => {
     },
   };
 };
-
 const SIMILAR_ADS = Array.from({length: SIMILAR_ADS_COUNT}, createAd);
+
+// eslint-disable-next-line no-console
+console.info(SIMILAR_ADS);
