@@ -1,3 +1,5 @@
+import {rrr} from './util.js';
+
 function getRandomIntInclusive(min, max) {
   min = (min < 0) ? 0 : Math.ceil(min);
   max = (max < 0) ? 0 : Math.floor(max);
@@ -68,3 +70,6 @@ const SIMILAR_ADS = Array.from({length: SIMILAR_ADS_COUNT}, createAd);
 
 // eslint-disable-next-line no-console
 console.info(SIMILAR_ADS);
+console.log(1);
+console.log(rrr);
+
