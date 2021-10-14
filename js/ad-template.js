@@ -97,7 +97,6 @@ for (let i=0; i<SIMILAR_ADS.length; i++) {
     ADTEMPLATE.querySelector('.popup__avatar').setAttribute('hidden', true);
   }
 
-
   ADS[i] = ADTEMPLATE;
 
 }
