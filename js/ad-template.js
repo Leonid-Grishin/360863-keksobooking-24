@@ -1,13 +1,13 @@
 import {SIMILAR_ADS } from './data.js';
 
 
-const similarAdsTemplate = document.querySelector('#card')
+const SIMILARADSTEMPLATE = document.querySelector('#card')
   .content
   .querySelector('.popup');
 
-const map = document.querySelector('#map-canvas');
+const MAP = document.querySelector('#map-canvas');
 
-const housesTypes = {
+const HOUSESTYPES = {
   flat: 'Квартира ',
   bungalow: 'Бунгало',
   house: 'Дом',
@@ -15,92 +15,91 @@ const housesTypes = {
   hotel: 'Отель',
 };
 
-const ads = new Array(SIMILAR_ADS.length).fill(0);
+const ADS = new Array(SIMILAR_ADS.length).fill(0);
 
 /*SIMILAR_ADS.forEach((ad)*/
 for (let i=0; i<SIMILAR_ADS.length; i++) {
-  const adTemplate = similarAdsTemplate.cloneNode(true);
+  const ADTEMPLATE = SIMILARADSTEMPLATE.cloneNode(true);
 
   if (typeof SIMILAR_ADS[i].offer.title !== 'undefined') {
-    adTemplate.querySelector('.popup__title').textContent = SIMILAR_ADS[i].offer.title;
+    ADTEMPLATE.querySelector('.popup__title').textContent = SIMILAR_ADS[i].offer.title;
   } else {
-    adTemplate.querySelector('.popup__title').setAttribute('hidden', true);
+    ADTEMPLATE.querySelector('.popup__title').setAttribute('hidden', true);
   }
 
   if (typeof SIMILAR_ADS[i].offer.address !== 'undefined') {
-    adTemplate.querySelector('.popup__text--address').textContent = SIMILAR_ADS[i].offer.address;
+    ADTEMPLATE.querySelector('.popup__text--address').textContent = SIMILAR_ADS[i].offer.address;
   } else {
-    adTemplate.querySelector('.popup__text--address').setAttribute('hidden', true);
+    ADTEMPLATE.querySelector('.popup__text--address').setAttribute('hidden', true);
   }
 
   if (typeof SIMILAR_ADS[i].offer.price !== 'undefined' && SIMILAR_ADS[i].offer.price > 0){
-    adTemplate.querySelector('.popup__text--price').textContent = `${SIMILAR_ADS[i].offer.price} ₽/ночь`;
+    ADTEMPLATE.querySelector('.popup__text--price').textContent = `${SIMILAR_ADS[i].offer.price} ₽/ночь`;
   } else {
-    adTemplate.querySelector('.popup__text--price').setAttribute('hidden', true);
+    ADTEMPLATE.querySelector('.popup__text--price').setAttribute('hidden', true);
   }
 
-  const offerType = SIMILAR_ADS[i].offer.type;
-  adTemplate.querySelector('.popup__type').textContent = housesTypes[offerType];
+  const OFFERTYPE = SIMILAR_ADS[i].offer.type;
+  ADTEMPLATE.querySelector('.popup__type').textContent = HOUSESTYPES[OFFERTYPE];
 
   if(typeof SIMILAR_ADS[i].offer.rooms !== 'undefined' && typeof SIMILAR_ADS[i].offer.guests !== 'undefined' && SIMILAR_ADS[i].offer.rooms > 0 && SIMILAR_ADS[i].offer.guests > 0) {
-    adTemplate.querySelector('.popup__text--capacity').textContent = `${SIMILAR_ADS[i].offer.rooms} комнаты для ${SIMILAR_ADS[i].offer.guests} гостей`;
+    ADTEMPLATE.querySelector('.popup__text--capacity').textContent = `${SIMILAR_ADS[i].offer.rooms} комнаты для ${SIMILAR_ADS[i].offer.guests} гостей`;
   } else {
-    adTemplate.querySelector('.popup__text--capacity').setAttribute('hidden', true);
+    ADTEMPLATE.querySelector('.popup__text--capacity').setAttribute('hidden', true);
   }
 
   if(typeof SIMILAR_ADS[i].offer.checkin !== 'undefined' && typeof SIMILAR_ADS[i].offer.checkout !== 'undefined') {
-    adTemplate.querySelector('.popup__text--time').textContent = `Заезд после ${SIMILAR_ADS[i].offer.checkin}, выезд до ${SIMILAR_ADS[i].offer.checkout}`;
+    ADTEMPLATE.querySelector('.popup__text--time').textContent = `Заезд после ${SIMILAR_ADS[i].offer.checkin}, выезд до ${SIMILAR_ADS[i].offer.checkout}`;
   } else {
-    adTemplate.querySelector('.popup__text--time').setAttribute('hidden', true);
+    ADTEMPLATE.querySelector('.popup__text--time').setAttribute('hidden', true);
   }
 
   if(typeof SIMILAR_ADS[i].offer.features !== 'undefined' && SIMILAR_ADS[i].offer.features.length > 0) {
-    const featuresOffer = SIMILAR_ADS[i].offer.features;
-    const featuresContainer = adTemplate.querySelector('.popup__features');
-    const featuresListsFragment = document.createDocumentFragment();
-    featuresOffer.forEach((featureItem) => {
-      const featuresListItem = adTemplate.querySelector(`.popup__feature--${featureItem}`);
-      if (featuresListItem) {
-        featuresListsFragment.append(featuresListItem);
+    const FEATURESOFFER = SIMILAR_ADS[i].offer.features;
+    const FEATURESCONTAINER = ADTEMPLATE.querySelector('.popup__features');
+    const FEATURESLISTSFRAGMENT = document.createDocumentFragment();
+    FEATURESOFFER.forEach((featureItem) => {
+      const FEATURESLISTITEM = ADTEMPLATE.querySelector(`.popup__feature--${featureItem}`);
+      if (FEATURESLISTITEM) {
+        FEATURESLISTSFRAGMENT.append(FEATURESLISTITEM);
       }
     });
-    featuresContainer.innerHTML = '';
-    featuresContainer.append(featuresListsFragment);
+    FEATURESCONTAINER.innerHTML = '';
+    FEATURESCONTAINER.append(FEATURESLISTSFRAGMENT);
   } else {
-    adTemplate.querySelector('.popup__features').setAttribute('hidden', true);
+    ADTEMPLATE.querySelector('.popup__features').setAttribute('hidden', true);
   }
 
   if(typeof SIMILAR_ADS[i].offer.description !== 'undefined') {
-    adTemplate.querySelector('.popup__description').textContent = SIMILAR_ADS[i].offer.description;
+    ADTEMPLATE.querySelector('.popup__description').textContent = SIMILAR_ADS[i].offer.description;
   } else {
-    adTemplate.querySelector('.popup__description').setAttribute('hidden', true);
+    ADTEMPLATE.querySelector('.popup__description').setAttribute('hidden', true);
   }
 
   if(SIMILAR_ADS[i].offer.photos !== 'undefined' && SIMILAR_ADS[i].offer.photos.length > 0){
-    const photosOffer = SIMILAR_ADS[i].offer.photos;
-    const photosContainer =  adTemplate.querySelector('.popup__photos');
-    const photoListsFragment = document.createDocumentFragment();
-    photosOffer.forEach((photoItem) =>
-    {   const newphotosListItem = photosContainer.querySelector('.popup__photo').cloneNode(true);
-      newphotosListItem.src = photoItem;
-      photoListsFragment.append(newphotosListItem);
+    const PHOTOSOFFER = SIMILAR_ADS[i].offer.photos;
+    const PHOTOSCONTAINER =  ADTEMPLATE.querySelector('.popup__photos');
+    const PHOTOLISTSFRAGMENT = document.createDocumentFragment();
+    PHOTOSOFFER.forEach((photoItem) =>
+    {   const NEWPHOTOSLISTITEM = PHOTOSCONTAINER.querySelector('.popup__photo').cloneNode(true);
+      NEWPHOTOSLISTITEM.src = photoItem;
+      PHOTOLISTSFRAGMENT.append(NEWPHOTOSLISTITEM);
     });
-    photosContainer.innerHTML = '';
-    photosContainer.append(photoListsFragment);
+    PHOTOSCONTAINER.innerHTML = '';
+    PHOTOSCONTAINER.append(PHOTOLISTSFRAGMENT);
   } else {
-    //adTemplate.querySelector('.popup__photos').innerHTML = '';
-    adTemplate.querySelector('.popup__photos').setAttribute('hidden', true);
+    ADTEMPLATE.querySelector('.popup__photos').setAttribute('hidden', true);
   }
 
   if(typeof SIMILAR_ADS[i].author.avatar !== 'undefined'){
-    adTemplate.querySelector('.popup__avatar').src = SIMILAR_ADS[i].author.avatar;
+    ADTEMPLATE.querySelector('.popup__avatar').src = SIMILAR_ADS[i].author.avatar;
   } else {
-    adTemplate.querySelector('.popup__avatar').setAttribute('hidden', true);
+    ADTEMPLATE.querySelector('.popup__avatar').setAttribute('hidden', true);
   }
 
 
-  ads[i] = adTemplate;
+  ADS[i] = ADTEMPLATE;
 
 }
-map.append(ads[2]);
+MAP.append(ADS[2]);
 
