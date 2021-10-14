@@ -28,17 +28,20 @@ const createAd = () => {
     .map((item, index) => PHOTOS_ALL[index]);
 
   return {
-    author: {avatar: AVATAR},
+    author: {
+      avatar: AVATAR,
+    },
     offer: {
-      title: 'Место для чила',
+      title: '!Уютное гнездышко для молодоженов',
       address: `${LOCATION_RANDOM.lat}, ${LOCATION_RANDOM.lng}`,
-      price: getRandomIntInclusive(0, 100),
+      price: getRandomIntInclusive(0, 1000),
       type: TYPES[getRandomIntInclusive(0, TYPES.length-1)],
-      guests: getRandomIntInclusive(0, 100),
+      rooms: getRandomIntInclusive(0, 8),
+      guests: getRandomIntInclusive(0, 10),
       checkin: CHECKINS[getRandomIntInclusive(0, CHECKINS.length-1)],
       checkout: CHECKOUTS[getRandomIntInclusive(0, CHECKOUTS.length-1)],
       features: FEATURES_RANDOM,
-      description: 'место для уютного отдыха',
+      description: '!Великолепная квартира-студия в центре Токио. Подходит как туристам, так и бизнесменам. Квартира полностью укомплектована и недавно отремонтирована.',
       photos: PHOTOS_RANDOM,
     },
     location: {
@@ -49,4 +52,4 @@ const createAd = () => {
 };
 const SIMILAR_ADS = Array.from({length: SIMILAR_ADS_COUNT}, createAd);
 
-export {SIMILAR_ADS};
+export {SIMILAR_ADS, FEATURES_ALL};
