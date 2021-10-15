@@ -1,5 +1,6 @@
 import {SIMILAR_ADS } from './data.js';
 
+console.log(SIMILAR_ADS[1].offer.title);
 
 const SIMILARADSTEMPLATE = document.querySelector('#card')
   .content
@@ -17,7 +18,6 @@ const HOUSESTYPES = {
 
 const ADS = new Array(SIMILAR_ADS.length).fill(0);
 
-/*SIMILAR_ADS.forEach((ad)*/
 for (let i=0; i<SIMILAR_ADS.length; i++) {
   const ADTEMPLATE = SIMILARADSTEMPLATE.cloneNode(true);
 
