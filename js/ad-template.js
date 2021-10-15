@@ -1,7 +1,5 @@
 import {SIMILAR_ADS } from './data.js';
 
-console.log(SIMILAR_ADS[1].offer.title);
-
 const SIMILARADSTEMPLATE = document.querySelector('#card')
   .content
   .querySelector('.popup');
