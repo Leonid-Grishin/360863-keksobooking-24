@@ -14,89 +14,57 @@ const HOUSESTYPES = {
   hotel: 'Отель',
 };
 
-const ADS = new Array(SIMILAR_ADS.length).fill(0);
+const FILLELEMENT = (parent, selector, prop, data, isCondition = true) => {
+  const elem = parent.querySelector(selector);
+  if (isCondition) {
+    elem[prop] = data;
+  } else {
+    elem.setAttribute('hidden', true);
+  }
+};
 
-for (let i=0; i<SIMILAR_ADS.length; i++) {
+const FILLSEVERALELEMENTS = (parent, selector, prop = 'src', data, isCondition = true) => {
+  if (isCondition) {
+    const LISTSFRAGMENT = document.createDocumentFragment();
+    data.forEach(
+      (item) => {
+        if (prop === 'src') {
+          const NEWPHOTOSLISTITEM = parent.querySelector('.popup__photo').cloneNode(true);
+          NEWPHOTOSLISTITEM[prop] = item;
+          LISTSFRAGMENT.append(NEWPHOTOSLISTITEM);
+        }
+        else {
+          const LISTITEM = parent.querySelector(`.popup__feature--${item}`);
+          if (LISTITEM) {
+            LISTSFRAGMENT.append(LISTITEM);
+          }
+        }
+      },
+    );
+    parent.querySelector(selector).innerHTML = '';
+    parent.querySelector(selector).append(LISTSFRAGMENT);
+  } else {
+    parent.querySelector(selector).setAttribute('hidden', true);}
+};
+
+
+const createCard = (adData) => {
   const ADTEMPLATE = SIMILARADSTEMPLATE.cloneNode(true);
 
-  if (typeof SIMILAR_ADS[i].offer.title !== 'undefined') {
-    ADTEMPLATE.querySelector('.popup__title').textContent = SIMILAR_ADS[i].offer.title;
-  } else {
-    ADTEMPLATE.querySelector('.popup__title').setAttribute('hidden', true);
-  }
+  FILLELEMENT(ADTEMPLATE, '.popup__title', 'textContent', adData.offer.title, adData.offer.title !== undefined);
+  FILLELEMENT(ADTEMPLATE, '.popup__text--address', 'textContent', adData.offer.address, adData.offer.address !== undefined);
+  FILLELEMENT(ADTEMPLATE, '.popup__text--price', 'textContent', `${adData.offer.price} ₽/ночь`, adData.offer.price !== undefined);
+  FILLELEMENT(ADTEMPLATE, '.popup__text--capacity', 'textContent', `${adData.offer.rooms} комнаты для ${adData.offer.guests} гостей`, adData.offer.rooms && adData.offer.guests !== undefined);
+  FILLELEMENT(ADTEMPLATE, '.popup__text--time', 'textContent', `Заезд после ${adData.offer.checkin}, выезд до ${adData.offer.checkout}`, adData.offer.checkin && adData.offer.checkout !== undefined);
+  FILLELEMENT(ADTEMPLATE, '.popup__description', 'textContent', adData.offer.description, adData.offer.description !== undefined);
+  FILLELEMENT(ADTEMPLATE, '.popup__avatar', 'src', adData.author.avatar, adData.author.avatar !== undefined);
+  FILLELEMENT(ADTEMPLATE, '.popup__type', 'textContent', HOUSESTYPES[adData.offer.type], adData.offer.type !== undefined);
+  FILLSEVERALELEMENTS(ADTEMPLATE, '.popup__photos', 'src', adData.offer.photos, adData.offer.photos !== undefined);
+  FILLSEVERALELEMENTS(ADTEMPLATE, '.popup__features', false, adData.offer.features, adData.offer.features !== undefined);
 
-  if (typeof SIMILAR_ADS[i].offer.address !== 'undefined') {
-    ADTEMPLATE.querySelector('.popup__text--address').textContent = SIMILAR_ADS[i].offer.address;
-  } else {
-    ADTEMPLATE.querySelector('.popup__text--address').setAttribute('hidden', true);
-  }
+  return ADTEMPLATE;
+};
 
-  if (typeof SIMILAR_ADS[i].offer.price !== 'undefined' && SIMILAR_ADS[i].offer.price > 0){
-    ADTEMPLATE.querySelector('.popup__text--price').textContent = `${SIMILAR_ADS[i].offer.price} ₽/ночь`;
-  } else {
-    ADTEMPLATE.querySelector('.popup__text--price').setAttribute('hidden', true);
-  }
+MAP.append(createCard(SIMILAR_ADS[4]));
 
-  const OFFERTYPE = SIMILAR_ADS[i].offer.type;
-  ADTEMPLATE.querySelector('.popup__type').textContent = HOUSESTYPES[OFFERTYPE];
-
-  if(typeof SIMILAR_ADS[i].offer.rooms !== 'undefined' && typeof SIMILAR_ADS[i].offer.guests !== 'undefined' && SIMILAR_ADS[i].offer.rooms > 0 && SIMILAR_ADS[i].offer.guests > 0) {
-    ADTEMPLATE.querySelector('.popup__text--capacity').textContent = `${SIMILAR_ADS[i].offer.rooms} комнаты для ${SIMILAR_ADS[i].offer.guests} гостей`;
-  } else {
-    ADTEMPLATE.querySelector('.popup__text--capacity').setAttribute('hidden', true);
-  }
-
-  if(typeof SIMILAR_ADS[i].offer.checkin !== 'undefined' && typeof SIMILAR_ADS[i].offer.checkout !== 'undefined') {
-    ADTEMPLATE.querySelector('.popup__text--time').textContent = `Заезд после ${SIMILAR_ADS[i].offer.checkin}, выезд до ${SIMILAR_ADS[i].offer.checkout}`;
-  } else {
-    ADTEMPLATE.querySelector('.popup__text--time').setAttribute('hidden', true);
-  }
-
-  if(typeof SIMILAR_ADS[i].offer.features !== 'undefined' && SIMILAR_ADS[i].offer.features.length > 0) {
-    const FEATURESOFFER = SIMILAR_ADS[i].offer.features;
-    const FEATURESCONTAINER = ADTEMPLATE.querySelector('.popup__features');
-    const FEATURESLISTSFRAGMENT = document.createDocumentFragment();
-    FEATURESOFFER.forEach((featureItem) => {
-      const FEATURESLISTITEM = ADTEMPLATE.querySelector(`.popup__feature--${featureItem}`);
-      if (FEATURESLISTITEM) {
-        FEATURESLISTSFRAGMENT.append(FEATURESLISTITEM);
-      }
-    });
-    FEATURESCONTAINER.innerHTML = '';
-    FEATURESCONTAINER.append(FEATURESLISTSFRAGMENT);
-  } else {
-    ADTEMPLATE.querySelector('.popup__features').setAttribute('hidden', true);
-  }
-
-  if(typeof SIMILAR_ADS[i].offer.description !== 'undefined') {
-    ADTEMPLATE.querySelector('.popup__description').textContent = SIMILAR_ADS[i].offer.description;
-  } else {
-    ADTEMPLATE.querySelector('.popup__description').setAttribute('hidden', true);
-  }
-
-  if(SIMILAR_ADS[i].offer.photos !== 'undefined' && SIMILAR_ADS[i].offer.photos.length > 0){
-    const PHOTOSOFFER = SIMILAR_ADS[i].offer.photos;
-    const PHOTOSCONTAINER =  ADTEMPLATE.querySelector('.popup__photos');
-    const PHOTOLISTSFRAGMENT = document.createDocumentFragment();
-    PHOTOSOFFER.forEach((photoItem) =>
-    {   const NEWPHOTOSLISTITEM = PHOTOSCONTAINER.querySelector('.popup__photo').cloneNode(true);
-      NEWPHOTOSLISTITEM.src = photoItem;
-      PHOTOLISTSFRAGMENT.append(NEWPHOTOSLISTITEM);
-    });
-    PHOTOSCONTAINER.innerHTML = '';
-    PHOTOSCONTAINER.append(PHOTOLISTSFRAGMENT);
-  } else {
-    ADTEMPLATE.querySelector('.popup__photos').setAttribute('hidden', true);
-  }
-
-  if(typeof SIMILAR_ADS[i].author.avatar !== 'undefined'){
-    ADTEMPLATE.querySelector('.popup__avatar').src = SIMILAR_ADS[i].author.avatar;
-  } else {
-    ADTEMPLATE.querySelector('.popup__avatar').setAttribute('hidden', true);
-  }
-
-  ADS[i] = ADTEMPLATE;
-
-}
-MAP.append(ADS[2]);
-
+export {MAP};
