@@ -1,18 +1,18 @@
-const makeForm = (methodClass = 'add', methodAtribute = 'setAttribute', parentClass, classChanged, atribute, atributeValue) => {
-  document.querySelector(`.${parentClass}`).classList[methodClass](classChanged);
+const makeForm = (parentClass, parentClassValue, attribute, attributeValue, methodClass, methodAttribute) => {
+  document.querySelector(`.${parentClass}`).classList[methodClass](parentClassValue);
   document.querySelectorAll(`form.${parentClass} > *`).forEach((item) => {
-    item[methodAtribute](atribute, atributeValue);
+    item[methodAttribute](attribute, attributeValue);
   });
 };
 
 const deactivateForm = () => {
-  makeForm('add', 'setAttribute', 'ad-form', 'ad-form--disabled', 'disabled', 'disabled');
-  makeForm('add', 'setAttribute','map__filters', 'ad-form--disabled', 'disabled', 'disabled');
+  makeForm('ad-form', 'ad-form--disabled', 'disabled', 'disabled','add', 'setAttribute');
+  makeForm('map__filters', 'ad-form--disabled', 'disabled', 'disabled', 'add', 'setAttribute');
 };
 
 const activateForm = () => {
-  makeForm('remove', 'removeAttribute', 'ad-form', 'ad-form--disabled', 'disabled');
-  makeForm('remove', 'removeAttribute','map__filters', 'ad-form--disabled', 'disabled');
+  makeForm('ad-form', 'ad-form--disabled', 'disabled','remove', 'removeAttribute');
+  makeForm('map__filters', 'ad-form--disabled', 'disabled','remove', 'removeAttribute');
 };
 
 deactivateForm();
@@ -20,40 +20,4 @@ activateForm();
 
 export {deactivateForm, activateForm};
 
-/*function deactivateForm(){
 
-  document.querySelector('.ad-form').classList.add('ad-form--disabled');
-
-  const fieldItems = document.querySelectorAll('form.ad-form > *');
-  fieldItems.forEach((fieldItem) => {
-    fieldItem.setAttribute('disabled', 'disabled');
-  });
-
-  document.querySelector('.map__filters').classList.add('ad-form--disabled');
-
-  const filterItems = document.querySelectorAll('form.map__filters > *');
-  filterItems.forEach((filterItem) => {
-    filterItem.setAttribute('disabled', 'disabled');
-  });
-}
-
-deactivateForm();
-
-function activateForm(){
-
-  document.querySelector('.ad-form').classList.remove('ad-form--disabled');
-
-  const fieldItems = document.querySelectorAll('form.ad-form > *');
-  fieldItems.forEach((fieldItem) => {
-    fieldItem.removeAttribute('disabled');
-  });
-
-  document.querySelector('.map__filters').classList.remove('ad-form--disabled');
-
-  const filterItems = document.querySelectorAll('form.map__filters > *');
-  filterItems.forEach((filterItem) => {
-    filterItem.removeAttribute('disabled');
-  });
-}
-
-activateForm();*/
