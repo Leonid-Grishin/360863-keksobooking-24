@@ -14,7 +14,7 @@ const HOUSESTYPES = {
   hotel: 'Отель',
 };
 
-const FILLELEMENT = (parent, selector, prop, data, isCondition = true) => {
+const fillElement = (parent, selector, prop, data, isCondition = true) => {
   const elem = parent.querySelector(selector);
   if (isCondition) {
     elem[prop] = data;
@@ -23,7 +23,7 @@ const FILLELEMENT = (parent, selector, prop, data, isCondition = true) => {
   }
 };
 
-const FILLSEVERALELEMENTS = (parent, selector, prop = 'src', data, isCondition = true) => {
+const fillSeveralElements = (parent, selector, prop = 'src', data, isCondition = true) => {
   if (isCondition) {
     const LISTSFRAGMENT = document.createDocumentFragment();
     data.forEach(
@@ -51,16 +51,16 @@ const FILLSEVERALELEMENTS = (parent, selector, prop = 'src', data, isCondition =
 const createCard = (adData) => {
   const ADTEMPLATE = SIMILARADSTEMPLATE.cloneNode(true);
 
-  FILLELEMENT(ADTEMPLATE, '.popup__title', 'textContent', adData.offer.title, adData.offer.title !== undefined);
-  FILLELEMENT(ADTEMPLATE, '.popup__text--address', 'textContent', adData.offer.address, adData.offer.address !== undefined);
-  FILLELEMENT(ADTEMPLATE, '.popup__text--price', 'textContent', `${adData.offer.price} ₽/ночь`, adData.offer.price !== undefined);
-  FILLELEMENT(ADTEMPLATE, '.popup__text--capacity', 'textContent', `${adData.offer.rooms} комнаты для ${adData.offer.guests} гостей`, adData.offer.rooms && adData.offer.guests !== undefined);
-  FILLELEMENT(ADTEMPLATE, '.popup__text--time', 'textContent', `Заезд после ${adData.offer.checkin}, выезд до ${adData.offer.checkout}`, adData.offer.checkin && adData.offer.checkout !== undefined);
-  FILLELEMENT(ADTEMPLATE, '.popup__description', 'textContent', adData.offer.description, adData.offer.description !== undefined);
-  FILLELEMENT(ADTEMPLATE, '.popup__avatar', 'src', adData.author.avatar, adData.author.avatar !== undefined);
-  FILLELEMENT(ADTEMPLATE, '.popup__type', 'textContent', HOUSESTYPES[adData.offer.type], adData.offer.type !== undefined);
-  FILLSEVERALELEMENTS(ADTEMPLATE, '.popup__photos', 'src', adData.offer.photos, adData.offer.photos !== undefined);
-  FILLSEVERALELEMENTS(ADTEMPLATE, '.popup__features', false, adData.offer.features, adData.offer.features !== undefined);
+  fillElement(ADTEMPLATE, '.popup__title', 'textContent', adData.offer.title, adData.offer.title !== undefined);
+  fillElement(ADTEMPLATE, '.popup__text--address', 'textContent', adData.offer.address, adData.offer.address !== undefined);
+  fillElement(ADTEMPLATE, '.popup__text--price', 'textContent', `${adData.offer.price} ₽/ночь`, adData.offer.price !== undefined);
+  fillElement(ADTEMPLATE, '.popup__text--capacity', 'textContent', `${adData.offer.rooms} комнаты для ${adData.offer.guests} гостей`, adData.offer.rooms && adData.offer.guests !== undefined);
+  fillElement(ADTEMPLATE, '.popup__text--time', 'textContent', `Заезд после ${adData.offer.checkin}, выезд до ${adData.offer.checkout}`, adData.offer.checkin && adData.offer.checkout !== undefined);
+  fillElement(ADTEMPLATE, '.popup__description', 'textContent', adData.offer.description, adData.offer.description !== undefined);
+  fillElement(ADTEMPLATE, '.popup__avatar', 'src', adData.author.avatar, adData.author.avatar !== undefined);
+  fillElement(ADTEMPLATE, '.popup__type', 'textContent', HOUSESTYPES[adData.offer.type], adData.offer.type !== undefined);
+  fillSeveralElements(ADTEMPLATE, '.popup__photos', 'src', adData.offer.photos, adData.offer.photos !== undefined);
+  fillSeveralElements(ADTEMPLATE, '.popup__features', false, adData.offer.features, adData.offer.features !== undefined);
 
   return ADTEMPLATE;
 };
