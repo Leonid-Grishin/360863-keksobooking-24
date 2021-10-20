@@ -56,3 +56,65 @@ const makeАvailable = function () {
 
 roomsInput.addEventListener('change', makeАvailable);
 
+
+document.querySelector('.ad-form').addEventListener('submit', (evt)=> {
+
+  evt.preventDefault();
+  //console.log(titleInput.valid);
+  /*if (document.querySelector('.ad-form').valid) {
+    const modalSuccess = document.querySelector('#success').content.cloneNode(true);
+    document.body.appendChild(modalSuccess);
+
+    const escListener = function (evtModal){
+      evtModal.preventDefault();
+      if (evtModal.key === 'Escape' || evtModal.key === 'Esc') {
+        document.querySelector('.success').remove();
+        document.querySelector('.success').removeEventListener('keydown', escListener);
+      }
+    };
+
+    const clickListener = function (){
+      document.querySelector('.success').remove();
+      document.querySelector('.success').removeEventListener('keydown', escListener);
+      document.querySelector('.success').removeEventListener('click', clickListener);
+    };
+
+    document.querySelector('.success').addEventListener('keydown', escListener);
+    document.querySelector('.success').addEventListener('click', clickListener);
+
+  } else {
+    const modalError = document.querySelector('#error').content.cloneNode(true);
+    document.body.appendChild(modalError);
+
+    const escListener = function (evtModal){
+      evtModal.preventDefault();
+      if (evtModal.key === 'Escape' || evtModal.key === 'Esc') {
+        document.querySelector('.error').remove();
+        document.querySelector('.error').removeEventListener('keydown', escListener);
+      }
+    };
+
+    const clickListener = function (){
+      document.querySelector('.error').remove();
+      document.querySelector('.error').removeEventListener('keydown', escListener);
+      document.querySelector('.error').removeEventListener('click', clickListener);
+    };
+
+    document.querySelector('.error').addEventListener('keydown', escListener);
+    document.querySelector('.error__button').addEventListener('click', clickListener);
+    document.querySelector('.error').addEventListener('click', clickListener);
+
+
+  }*/
+});
+
+/*
+
+1. получилось слишком громоздкая часть с комнатами
+2. не получается получить true у инпута title по свойству titleInput.valid, те console.log(titleInput.valid)
+3. нужно удалить все addEventListener когда открывается модальное окно?
+4. почему то не получается сделать условие, чтобы на клавишу esc закарывалась модалка
+5. после того как модалка закроется надо тоже все event listner удалять, или если удалиться эллемент dom (сама модалка, то и листнеры тоже удаляться)
+
+*/
+
