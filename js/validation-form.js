@@ -60,7 +60,10 @@ roomsInput.addEventListener('change', makeАvailable);
 document.querySelector('.ad-form').addEventListener('submit', (evt)=> {
 
   evt.preventDefault();
+
   //console.log(titleInput.valid);
+
+
   /*if (document.querySelector('.ad-form').valid) {
     const modalSuccess = document.querySelector('#success').content.cloneNode(true);
     document.body.appendChild(modalSuccess);
