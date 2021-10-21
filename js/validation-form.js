@@ -62,11 +62,14 @@ document.querySelector('.ad-form').addEventListener('submit', (evt)=> {
   evt.preventDefault();
 
   if (document.querySelector('.ad-form').checkValidity()) {
+    document.querySelector('.ad-form').reset(); //не сбрасывается поле количество мест
+
     const modalSuccess = document.querySelector('#success').content.cloneNode(true);
     document.body.appendChild(modalSuccess);
 
     const escListener = function (evtModal){
       if (evtModal.key === 'Escape' || evtModal.key === 'Esc') {
+        evtModal.preventDefault();
         document.querySelector('.success').remove();
       }
     };
@@ -84,6 +87,7 @@ document.querySelector('.ad-form').addEventListener('submit', (evt)=> {
 
     const escListener = function (evtModal){
       if (evtModal.key === 'Escape' || evtModal.key === 'Esc') {
+        evtModal.preventDefault();
         document.querySelector('.error').remove();
       }
     };
@@ -106,7 +110,7 @@ document.querySelector('.ad-form').addEventListener('submit', (evt)=> {
 2. почему то не получается сделать условие, чтобы на клавишу esc закарывалась модалка
 3. нужно удалить все addEventListener когда открывается модальное окно?
 4. после того как модалка закроется надо тоже все event listner удалять, или если удалиться эллемент dom (сама модалка, то и листнеры тоже удаляться)
-
+5. не сбрасывается поле количество мест
 */
 
 
