@@ -61,9 +61,7 @@ document.querySelector('.ad-form').addEventListener('submit', (evt)=> {
 
   evt.preventDefault();
 
-
-  //if (document.querySelector('.ad-form').valid) { временно убрал со всей формы
-  if (titleInput.checkValidity()) {
+  if (document.querySelector('.ad-form').checkValidity()) {
     const modalSuccess = document.querySelector('#success').content.cloneNode(true);
     document.body.appendChild(modalSuccess);
 
