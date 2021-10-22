@@ -78,19 +78,17 @@ const formAd = document.querySelector('.ad-form');
 const addEscListener = function (evt) {
   if (evt.key === 'Escape' || evt.key === 'Esc') {
     evt.preventDefault();
-    document.body.lastChild.remove();
+    document.body.children[document.body.children.length-1].remove();
     document.removeEventListener('keydown', addEscListener);
   }
 };
 const addClickListener = function (){
-  document.body.lastChild.remove();
-  document.body.removeEventListener('click', addClickListener);
+  document.body.children[document.body.children.length-1].remove();
+  document.removeEventListener('keydown', addEscListener);
 };
 
 const validateForm = function (evt){
   evt.preventDefault();
-  document.addEventListener('keydown', addEscListener);
-  document.body.addEventListener('click', addClickListener);
 
   if (formAd.checkValidity()){
     const modalSuccess = document.querySelector('#success').content.cloneNode(true);
@@ -102,7 +100,9 @@ const validateForm = function (evt){
     document.body.appendChild(modalError);
     document.querySelector('.error__button').addEventListener('click', addClickListener);
   }
-
+  document.addEventListener('keydown', addEscListener);
+  document.body.children[document.body.children.length-1].addEventListener('click', addClickListener);
+  //console.log(document.body.children);
 };
 
 formAd.addEventListener('submit', validateForm);
