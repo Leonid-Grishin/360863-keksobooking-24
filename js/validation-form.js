@@ -25,92 +25,85 @@ priceInput.addEventListener('input', () => {
   priceInput.reportValidity();
 });
 
+const ROOMSGUESTDEPENDENCE = {
+  1 : [1],
+  2 : [1, 2],
+  3 : [1, 2, 3],
+  100 : [0],
+};
 const roomsInput = document.querySelector('#room_number');
+const changeGuests = function (evt) {
+  document.querySelector('#capacity').querySelectorAll('option').forEach((item)=>{
+    item.disabled = true;
+  });
 
-const makeАvailable = function () {
-
-  document.querySelectorAll('#capacity > *').forEach((selector)=>{selector.setAttribute('disabled', 'disables'); selector.removeAttribute('selected');});
-
-  if (roomsInput.value === '100') {
-
-    document.querySelector('#capacity').querySelector('[value=\'0\']').removeAttribute('disabled');
-    document.querySelector('#capacity').querySelector('[value=\'0\']').setAttribute('selected','selected');
-  } else if (roomsInput.value === '2') {
-
-    document.querySelector('#capacity').querySelector('[value=\'2\']').removeAttribute('disabled');
-    document.querySelector('#capacity').querySelector('[value=\'1\']').removeAttribute('disabled');
-    document.querySelector('#capacity').querySelector('[value=\'2\']').setAttribute('selected','selected');
-  } else if (roomsInput.value === '3') {
-
-    document.querySelector('#capacity').querySelector('[value=\'2\']').removeAttribute('disabled');
-    document.querySelector('#capacity').querySelector('[value=\'1\']').removeAttribute('disabled');
-    document.querySelector('#capacity').querySelector('[value=\'3\']').removeAttribute('disabled');
-    document.querySelector('#capacity').querySelector('[value=\'3\']').setAttribute('selected','selected');
-  } else if (roomsInput.value === '1') {
-
-    document.querySelector('#capacity').querySelector('[value=\'1\']').removeAttribute('disabled');
-    document.querySelector('#capacity').querySelector('[value=\'1\']').setAttribute('selected','selected');
-  }
-
+  ROOMSGUESTDEPENDENCE[evt.target.value].forEach((item) => {
+    document.querySelector('#capacity').querySelector(`option[value='${item}']`).disabled = false;
+    document.querySelector('#capacity').value = item;
+  });
 };
 
-roomsInput.addEventListener('change', makeАvailable);
+roomsInput.addEventListener('change', changeGuests);
 
 
-document.querySelector('.ad-form').addEventListener('submit', (evt)=> {
+const typeHouseInput = document.querySelector('#type');
+const TYPEHOUSEPRICEDEPENDENCE = {
+  'bungalow' : 0,
+  'flat' : 1000,
+  'hotel' : 3000,
+  'house' : 5000,
+  'palace' : 10000,
+};
 
+const changeMinPrice = function (evt){
+  document.querySelector('#price').min = TYPEHOUSEPRICEDEPENDENCE[evt.target.value];
+  document.querySelector('#price').placeholder = `от ${TYPEHOUSEPRICEDEPENDENCE[evt.target.value]}`;
+};
+
+typeHouseInput.addEventListener('change', changeMinPrice);
+
+const changeTimeIn = function (evt){
+  document.querySelector('#timeout').value = evt.target.value;
+};
+document.querySelector('#timein').addEventListener('change', changeTimeIn);
+
+const changeTimeOut = function (evt){
+  document.querySelector('#timein').value = evt.target.value;
+};
+document.querySelector('#timeout').addEventListener('change', changeTimeOut);
+
+
+const formAd = document.querySelector('.ad-form');
+
+const addEscListener = function (evt) {
+  if (evt.key === 'Escape' || evt.key === 'Esc') {
+    evt.preventDefault();
+    document.body.lastChild.remove();
+    document.removeEventListener('keydown', addEscListener);
+  }
+};
+const addClickListener = function (){
+  document.body.lastChild.remove();
+  document.body.removeEventListener('click', addClickListener);
+};
+
+const validateForm = function (evt){
   evt.preventDefault();
+  document.addEventListener('keydown', addEscListener);
+  document.body.addEventListener('click', addClickListener);
 
-  if (document.querySelector('.ad-form').checkValidity()) {
-    document.querySelector('.ad-form').reset(); //не сбрасывается поле количество мест
-
+  if (formAd.checkValidity()){
     const modalSuccess = document.querySelector('#success').content.cloneNode(true);
+    document.querySelector('.ad-form').reset();
     document.body.appendChild(modalSuccess);
-
-    const escListener = function (evtModal){
-      if (evtModal.key === 'Escape' || evtModal.key === 'Esc') {
-        evtModal.preventDefault();
-        document.querySelector('.success').remove();
-      }
-    };
-
-    const clickListener = function (){
-      document.querySelector('.success').remove();
-    };
-
-    document.querySelector('.success').addEventListener('keydown', escListener);
-    document.querySelector('.success').addEventListener('click', clickListener);
 
   } else {
     const modalError = document.querySelector('#error').content.cloneNode(true);
     document.body.appendChild(modalError);
-
-    const escListener = function (evtModal){
-      if (evtModal.key === 'Escape' || evtModal.key === 'Esc') {
-        evtModal.preventDefault();
-        document.querySelector('.error').remove();
-      }
-    };
-
-    const clickListener = function (){
-      document.querySelector('.error').remove();
-    };
-
-    document.querySelector('.error').addEventListener('keydown', escListener);
-    document.querySelector('.error__button').addEventListener('click', clickListener);
-    document.querySelector('.error').addEventListener('click', clickListener);
-
-
+    document.querySelector('.error__button').addEventListener('click', addClickListener);
   }
-});
 
-/*
+};
 
-1. получилось слишком громоздкая часть с комнатами
-2. почему то не получается сделать условие, чтобы на клавишу esc закарывалась модалка
-3. нужно удалить все addEventListener когда открывается модальное окно?
-4. после того как модалка закроется надо тоже все event listner удалять, или если удалиться эллемент dom (сама модалка, то и листнеры тоже удаляться)
-5. не сбрасывается поле количество мест
-*/
-
+formAd.addEventListener('submit', validateForm);
 
