@@ -1,11 +1,8 @@
 const titleInput = document.querySelector('#title');
 titleInput.addEventListener('input', () => {
   const MINTITLELENGTH = 30;
-  const MAXTITLELENGTH = 100;
   if (titleInput.value.length < MINTITLELENGTH){
     titleInput.setCustomValidity(`Еще минимум ${MINTITLELENGTH-titleInput.value.length} символов`);
-  } else if (titleInput.value.length > MAXTITLELENGTH){
-    titleInput.setCustomValidity(`Удалите лишние ${titleInput.value.length - MAXTITLELENGTH} символов`);
   } else {
     titleInput.setCustomValidity('');
   }
@@ -62,38 +59,41 @@ const changeMinPrice = function (evt){
 
 typeHouseInput.addEventListener('change', changeMinPrice);
 
-const changeTimeIn = function (evt){
-  document.querySelector('#timeout').value = evt.target.value;
+const changeTime = function (evt) {
+  if (this.name === 'timein') {
+    document.querySelector('#timeout').value = evt.target.value;
+  } else {
+    document.querySelector('#timein').value = evt.target.value;
+  }
 };
-document.querySelector('#timein').addEventListener('change', changeTimeIn);
 
-const changeTimeOut = function (evt){
-  document.querySelector('#timein').value = evt.target.value;
-};
-document.querySelector('#timeout').addEventListener('change', changeTimeOut);
-
+document.querySelector('#timein').addEventListener('change', changeTime);
+document.querySelector('#timeout').addEventListener('change', changeTime);
 
 const formAd = document.querySelector('.ad-form');
+const modalSuccess = document.querySelector('#success').content.cloneNode(true);
 
 const addEscListener = function (evt) {
   if (evt.key === 'Escape' || evt.key === 'Esc') {
     evt.preventDefault();
     document.body.children[document.body.children.length-1].remove();
     document.removeEventListener('keydown', addEscListener);
+    if (modalSuccess){document.querySelector('.ad-form').reset();}
+
   }
 };
 const addClickListener = function (){
   document.body.children[document.body.children.length-1].remove();
   document.removeEventListener('keydown', addEscListener);
+  if (modalSuccess){document.querySelector('.ad-form').reset();}
 };
 
-const validateForm = function (evt){
-  evt.preventDefault();
-
+const validateForm = function (){
+  //evt.preventDefault();
   if (formAd.checkValidity()){
-    const modalSuccess = document.querySelector('#success').content.cloneNode(true);
-    document.querySelector('.ad-form').reset();
+
     document.body.appendChild(modalSuccess);
+
 
   } else {
     const modalError = document.querySelector('#error').content.cloneNode(true);
@@ -102,7 +102,7 @@ const validateForm = function (evt){
   }
   document.addEventListener('keydown', addEscListener);
   document.body.children[document.body.children.length-1].addEventListener('click', addClickListener);
-  //console.log(document.body.children);
+
 };
 
 formAd.addEventListener('submit', validateForm);
