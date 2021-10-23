@@ -59,16 +59,13 @@ const changeMinPrice = function (evt){
 
 typeHouseInput.addEventListener('change', changeMinPrice);
 
-const changeTime = function (evt) {
-  if (this.name === 'timein') {
-    document.querySelector('#timeout').value = evt.target.value;
-  } else {
-    document.querySelector('#timein').value = evt.target.value;
-  }
+const changeTime = function (mainSelector, dependSelector) {
+  document.querySelector(mainSelector).addEventListener(
+    'change', (evt) => document.querySelector(dependSelector).value = evt.target.value,
+  );
 };
-
-document.querySelector('#timein').addEventListener('change', changeTime);
-document.querySelector('#timeout').addEventListener('change', changeTime);
+changeTime('#timein', '#timeout');
+changeTime('#timeout', '#timein');
 
 const formAd = document.querySelector('.ad-form');
 const modalSuccess = document.querySelector('#success').content.cloneNode(true);
