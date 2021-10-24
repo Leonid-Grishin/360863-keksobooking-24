@@ -65,6 +65,6 @@ const createCard = (adData) => {
   return ADTEMPLATE;
 };
 
-//MAP.append(createCard(SIMILAR_ADS[4]));
+MAP.append(createCard(SIMILAR_ADS[4]));
 
 export {MAP};
