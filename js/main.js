@@ -3,7 +3,6 @@ import {MAP} from './ad-template.js';
 import {deactivateForm, activateForm} from './activation-form.js';
 import './validation-form.js';
 
-
 //eslint-disable-next-line no-console
 console.info(SIMILAR_ADS);
 
