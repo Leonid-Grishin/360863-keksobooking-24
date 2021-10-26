@@ -162,6 +162,6 @@ document.querySelector('.ad-form__reset').addEventListener('click', ()=>{
   if (document.querySelector('.leaflet-popup')){document.querySelector('.leaflet-popup').remove();}
 });
 
-console.info(Array.from(document.querySelectorAll('.map__checkbox')));
+//console.info(Array.from(document.querySelectorAll('.map__checkbox')));
 //console.log(document.querySelectorAll('.map__checkbox'));
 export {mapBooking, resetMainPing, resetMapView};
