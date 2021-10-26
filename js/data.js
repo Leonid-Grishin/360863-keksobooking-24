@@ -8,7 +8,7 @@ const PHOTOS_ALL = ['https://assets.htmlacademy.ru/content/intensive/javascript-
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'];
 
-const SIMILAR_ADS_COUNT = 10;
+const SIMILAR_ADS_COUNT = 80;
 
 const NUMBERS = new Array(SIMILAR_ADS_COUNT).fill(0);
 
@@ -34,10 +34,10 @@ const createAd = () => {
     offer: {
       title: '!Уютное гнездышко для молодоженов',
       address: `${LOCATION_RANDOM.lat}, ${LOCATION_RANDOM.lng}`,
-      price: getRandomIntInclusive(0, 1000),
+      price: getRandomIntInclusive(0, 70000),
       type: TYPES[getRandomIntInclusive(0, TYPES.length-1)],
-      rooms: getRandomIntInclusive(0, 8),
-      guests: getRandomIntInclusive(0, 10),
+      rooms: getRandomIntInclusive(1, 5),
+      guests: getRandomIntInclusive(1, 4),
       checkin: CHECKINS[getRandomIntInclusive(0, CHECKINS.length-1)],
       checkout: CHECKOUTS[getRandomIntInclusive(0, CHECKOUTS.length-1)],
       features: FEATURES_RANDOM,
