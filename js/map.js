@@ -129,14 +129,20 @@ const getGuestd = function (offer, value){
   else if (value === '0') {return offer === 100;} //вот тут что нужно искать?
 };
 
+/*const featuresCheckedD = document.querySelectorAll('.map__checkbox');
+const offerD = [].map.call(featuresCheckedD, (item) => item.value);
+console.log(offerD);*/
 
 const getFeatures = function (offer){
-  const featuresChecked = document.querySelectorAll('.map__checkbox option:checked');
+  const featuresChecked = document.querySelectorAll('.map__checkbox:checked');
   return offer === [].map.call(featuresChecked, (item) => item.value);
 };
 
 document.querySelector('.map__filters').addEventListener('change', () => {
   markerGroup.clearLayers();
+
+
+  console.log([].map.call(document.querySelectorAll('.map__checkbox:checked'), (item) => item.value));
 
   const newAdsFilter = SIMILAR_ADS.filter((item) => (getRoomType(item['offer']['type'], document.querySelector('#housing-type').value)
       && getRooms(item['offer']['rooms'], document.querySelector('#housing-rooms').value)
