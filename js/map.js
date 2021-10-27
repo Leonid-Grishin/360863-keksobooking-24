@@ -129,7 +129,11 @@ const getGuestd = function (offer, value){
   else if (value === '0') {return offer === 100;} //вот тут что нужно искать?
 };
 
-//const getFeatures = function (){};
+
+const getFeatures = function (offer){
+  const featuresChecked = document.querySelectorAll('.map__checkbox option:checked');
+  return offer === [].map.call(featuresChecked, (item) => item.value);
+};
 
 document.querySelector('.map__filters').addEventListener('change', () => {
   markerGroup.clearLayers();
@@ -138,6 +142,7 @@ document.querySelector('.map__filters').addEventListener('change', () => {
       && getRooms(item['offer']['rooms'], document.querySelector('#housing-rooms').value)
       && getPrice(item['offer']['price'], document.querySelector('#housing-price').value)
       && getGuestd(item['offer']['guests'], document.querySelector('#housing-guests').value)
+      && getFeatures(item['offer']['features'])
   ),
 
 
