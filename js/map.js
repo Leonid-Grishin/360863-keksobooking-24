@@ -135,13 +135,14 @@ console.log(offerD);*/
 
 const getFeatures = function (offer){
   const featuresChecked = document.querySelectorAll('.map__checkbox:checked');
-  return offer === [].map.call(featuresChecked, (item) => item.value);
+  if(featuresChecked.length > 0){return offer === [].map.call(featuresChecked, (item) => item.value);}
+  else {return ' ';}
 };
 
 document.querySelector('.map__filters').addEventListener('change', () => {
   markerGroup.clearLayers();
 
-
+  console.log(document.querySelectorAll('.map__checkbox:checked').length > 0);
   console.log([].map.call(document.querySelectorAll('.map__checkbox:checked'), (item) => item.value));
 
   const newAdsFilter = SIMILAR_ADS.filter((item) => (getRoomType(item['offer']['type'], document.querySelector('#housing-type').value)
