@@ -1,6 +1,9 @@
 const getFilterItems = function (selector, item){
-  if (document.querySelector(`#housing-${selector}`).value === 'any'){return ' ';}
-  else if (Number.isInteger(item['offer'][selector])){return item['offer'][selector] === +document.querySelector(`#housing-${selector}`).value;}
+  if (document.querySelector(`#housing-${selector}`).value === 'any'){
+    return ' ';
+  } else if (Number.isInteger(item['offer'][selector])){
+    return item['offer'][selector] === +document.querySelector(`#housing-${selector}`).value;
+  }
   return item['offer'][selector] === document.querySelector(`#housing-${selector}`).value;
 };
 
@@ -13,8 +16,7 @@ const getPrice = function (offer, value){
 
 const getFeatures = function (offer){
   const featuresChecked = document.querySelectorAll('.map__checkbox:checked');
-  if(featuresChecked.length > 0){return offer === [].map.call(featuresChecked, (item) => item.value);}
-  else {return ' ';}
+  return Array.from(featuresChecked).map((item) => item.value).every((elem) => offer.includes(elem));
 };
 
 export {getFilterItems, getPrice, getFeatures};
