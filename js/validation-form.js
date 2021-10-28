@@ -1,3 +1,5 @@
+import {resetMainPing, resetMapView} from './map.js';
+
 const titleInput = document.querySelector('#title');
 titleInput.addEventListener('input', () => {
   const MINTITLELENGTH = 30;
@@ -75,14 +77,23 @@ const addEscListener = function (evt) {
     evt.preventDefault();
     document.body.children[document.body.children.length-1].remove();
     document.removeEventListener('keydown', addEscListener);
-    if (modalSuccess){document.querySelector('.ad-form').reset();}
-
+    if (modalSuccess){
+      document.querySelector('.ad-form').reset();
+      resetMainPing();
+      resetMapView();
+    }
+    if (document.querySelector('.leaflet-popup')){document.querySelector('.leaflet-popup').remove();}
   }
 };
 const addClickListener = function (){
   document.body.children[document.body.children.length-1].remove();
   document.removeEventListener('keydown', addEscListener);
-  if (modalSuccess){document.querySelector('.ad-form').reset();}
+  if (modalSuccess){
+    document.querySelector('.ad-form').reset();
+    resetMainPing();
+    resetMapView();
+  }
+  if (document.querySelector('.leaflet-popup')){document.querySelector('.leaflet-popup').remove();}
 };
 
 const validateForm = function (){
