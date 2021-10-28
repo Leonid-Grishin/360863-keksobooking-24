@@ -1,6 +1,7 @@
 import {activateForm, deactivateForm} from './activation-form.js';
 import {SIMILAR_ADS, createCard} from './ad-template.js';
 import {getRandomIntInclusive} from './util.js';
+import {getFilterItems, getPrice, getFeatures} from './map-filter.js';
 
 deactivateForm();
 const mapBooking = L.map('map-canvas');
@@ -92,67 +93,25 @@ const createMarkerAd = (item) => {
     .addTo(markerGroup)
     .bindPopup(createCard(item));
 };
-
-const numberX = getRandomIntInclusive(0, SIMILAR_ADS.length-11); //не могу придумать правильное название для переменной
+const numberX = getRandomIntInclusive(0, SIMILAR_ADS.length-11);
 SIMILAR_ADS.slice(numberX, numberX + 10).forEach((item)=>{
   createMarkerAd(item);
 });
 
-
-const getRooms = function (offer, value){
-  if (value === 'any') {return offer >= 0;}
-  else if (value === '1') {return offer === 1;}
-  else if (value === '2') {return offer === 2;}
-  else if (value === '3') {return offer === 3;}
-};
-
-const getRoomType = function (offer, value){
-  if (value === 'any') {return ' ';}
-  else if (value === 'bungalow') {return offer === 'bungalow';}
-  else if (value === 'flat') {return offer === 'flat';}
-  else if (value === 'hotel') {return offer === 'hotel';}
-  else if (value === 'house') {return offer === 'house';}
-  else if (value === 'palace') {return offer === 'palace';}
-};
-
-const getPrice = function (offer, value){
-  if (value === 'any') {return offer >= 0;}
-  else if (value === 'middle') {return offer >= 10000 && offer <=50000;}
-  else if (value === 'low') {return offer < 10000;}
-  else if (value === 'high') {return offer > 50000;}
-};
-
-const getGuestd = function (offer, value){
-  if (value === 'any') {return offer >= 0;}
-  else if (value === '2') {return offer === 2 ;}
-  else if (value === '1') {return offer === 1;}
-  else if (value === '0') {return offer === 100;} //вот тут что нужно искать?
-};
-
-/*const featuresCheckedD = document.querySelectorAll('.map__checkbox');
-const offerD = [].map.call(featuresCheckedD, (item) => item.value);
-console.log(offerD);*/
-
-const getFeatures = function (offer){
-  const featuresChecked = document.querySelectorAll('.map__checkbox:checked');
-  if(featuresChecked.length > 0){return offer === [].map.call(featuresChecked, (item) => item.value);}
-  else {return ' ';}
-};
+document.querySelector('.ad-form__reset').addEventListener('click', ()=>{
+  if (document.querySelector('.leaflet-popup')){document.querySelector('.leaflet-popup').remove();}
+});
 
 document.querySelector('.map__filters').addEventListener('change', () => {
   markerGroup.clearLayers();
 
-  console.log(document.querySelectorAll('.map__checkbox:checked').length > 0);
-  console.log([].map.call(document.querySelectorAll('.map__checkbox:checked'), (item) => item.value));
-
-  const newAdsFilter = SIMILAR_ADS.filter((item) => (getRoomType(item['offer']['type'], document.querySelector('#housing-type').value)
-      && getRooms(item['offer']['rooms'], document.querySelector('#housing-rooms').value)
-      && getPrice(item['offer']['price'], document.querySelector('#housing-price').value)
-      && getGuestd(item['offer']['guests'], document.querySelector('#housing-guests').value)
-      && getFeatures(item['offer']['features'])
+  const newAdsFilter = SIMILAR_ADS.filter((item) => (
+    getFilterItems('type', item)
+    && getFilterItems('rooms', item)
+    && getFilterItems('guests', item)
+    && getPrice(item['offer']['price'], document.querySelector('#housing-price').value)
+    && getFeatures(item['offer']['features'])
   ),
-
-
   );
 
   const numberY = getRandomIntInclusive(0, newAdsFilter.length-11);
@@ -161,19 +120,4 @@ document.querySelector('.map__filters').addEventListener('change', () => {
   });
 });
 
-document.querySelector('.map__features').addEventListener('click', ()=>{
-
-});
-
-/*document.querySelectorAll('.map__checkbox').forEach((item)=>{
-  console.log(item.value);
-});*/
-
-
-document.querySelector('.ad-form__reset').addEventListener('click', ()=>{
-  if (document.querySelector('.leaflet-popup')){document.querySelector('.leaflet-popup').remove();}
-});
-
-//console.info(Array.from(document.querySelectorAll('.map__checkbox')));
-//console.log(document.querySelectorAll('.map__checkbox'));
 export {mapBooking, resetMainPing, resetMapView};
