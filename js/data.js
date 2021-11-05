@@ -1,3 +1,4 @@
+/*
 import {getRandomIntInclusive, getRandomFloatInclusive, getUniqueElement} from './util.js';
 
 const TYPES = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
@@ -40,7 +41,7 @@ const createAd = () => {
       guests: getRandomIntInclusive(1, 4),
       checkin: CHECKINS[getRandomIntInclusive(0, CHECKINS.length-1)],
       checkout: CHECKOUTS[getRandomIntInclusive(0, CHECKOUTS.length-1)],
-      features: FEATURES_RANDOM,
+      //features: FEATURES_RANDOM,
       description: '!Великолепная квартира-студия в центре Токио. Подходит как туристам, так и бизнесменам. Квартира полностью укомплектована и недавно отремонтирована.',
       photos: PHOTOS_RANDOM,
     },
@@ -52,4 +53,5 @@ const createAd = () => {
 };
 const SIMILAR_ADS = Array.from({length: SIMILAR_ADS_COUNT}, createAd);
 
-export {SIMILAR_ADS, FEATURES_ALL};
+export {SIMILAR_ADS};
+*/

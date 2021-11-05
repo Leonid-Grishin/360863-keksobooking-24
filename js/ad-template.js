@@ -1,10 +1,7 @@
-import {SIMILAR_ADS } from './data.js';
-
 const SIMILARADSTEMPLATE = document.querySelector('#card')
   .content
   .querySelector('.popup');
 
-const MAP = document.querySelector('#map-canvas');
 
 const HOUSESTYPES = {
   flat: 'Квартира ',
@@ -65,6 +62,4 @@ const createCard = (adData) => {
   return ADTEMPLATE;
 };
 
-//MAP.append(createCard(SIMILAR_ADS[4]));
-
-export {MAP, SIMILAR_ADS, createCard};
+export {createCard};

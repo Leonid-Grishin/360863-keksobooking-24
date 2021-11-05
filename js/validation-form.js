@@ -1,5 +1,3 @@
-import {resetMainPing, resetMapView} from './map.js';
-
 const titleInput = document.querySelector('#title');
 titleInput.addEventListener('input', () => {
   const MINTITLELENGTH = 30;
@@ -69,34 +67,8 @@ const changeTime = function (mainSelector, dependSelector) {
 changeTime('#timein', '#timeout');
 changeTime('#timeout', '#timein');
 
-const formAd = document.querySelector('.ad-form');
-const modalSuccess = document.querySelector('#success').content.cloneNode(true);
 
-const addEscListener = function (evt) {
-  if (evt.key === 'Escape' || evt.key === 'Esc') {
-    evt.preventDefault();
-    document.body.children[document.body.children.length-1].remove();
-    document.removeEventListener('keydown', addEscListener);
-    if (modalSuccess){
-      document.querySelector('.ad-form').reset();
-      resetMainPing();
-      resetMapView();
-    }
-    if (document.querySelector('.leaflet-popup')){document.querySelector('.leaflet-popup').remove();}
-  }
-};
-const addClickListener = function (){
-  document.body.children[document.body.children.length-1].remove();
-  document.removeEventListener('keydown', addEscListener);
-  if (modalSuccess){
-    document.querySelector('.ad-form').reset();
-    resetMainPing();
-    resetMapView();
-  }
-  if (document.querySelector('.leaflet-popup')){document.querySelector('.leaflet-popup').remove();}
-};
-
-const validateForm = function (){
+/*const validateForm = function (){
   //evt.preventDefault();
   if (formAd.checkValidity()){
 
@@ -113,5 +85,5 @@ const validateForm = function (){
 
 };
 
-formAd.addEventListener('submit', validateForm);
+formAd.addEventListener('submit', validateForm);*/
 
