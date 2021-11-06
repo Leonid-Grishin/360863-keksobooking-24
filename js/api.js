@@ -7,9 +7,9 @@ const getData = (url, onSuccess, onFail) => {
       throw new Error(`${response.status} — ${response.statusText}`);
     })
     .then((response) => response.json())
-    .then((SIMILAR_ADS) => {
-      onSuccess(SIMILAR_ADS);
-      document.querySelector('.map__filters').addEventListener('change', () => onSuccess(SIMILAR_ADS));
+    .then((data) => {
+      onSuccess(data);
+      document.querySelector('.map__filters').addEventListener('change', () => onSuccess(data));
     })
     .catch(() => {
       onFail('данные не загрузились');
@@ -18,9 +18,9 @@ const getData = (url, onSuccess, onFail) => {
 };
 
 
-const sendData = (onSuccess, onFail, body) => {
+const sendData = (url, onSuccess, onFail, body) => {
   fetch(
-    'https://24.javascript.pages.academy/keksobooking',
+    url,
     {
       method: 'POST',
       body,

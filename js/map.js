@@ -1,12 +1,7 @@
-import {activateForm, deactivateForm} from './activation-form.js';
+import {activateForm} from './activation-form.js';
 import {createCard} from './ad-template.js';
-/*import {SIMILAR_ADS} from './data.js';
-import {getFilterItems, getPrice, getFeatures} from './map-filter.js';
-import {createMarkerAd} from './render-marker.js';*/
 
-deactivateForm();
 
-//загружаем основу карты
 const mapBooking = L.map('map-canvas');
 
 mapBooking.on('load', () => {
@@ -26,8 +21,6 @@ L.tileLayer(
   },
 ).addTo(mapBooking);
 
-
-//добавляем красный маркер
 const mainPinIcon = L.icon({
   iconUrl: '/img/main-pin.svg',
   iconSize: [52, 52],
@@ -50,7 +43,7 @@ marker.on('moveend', (evt) => {
   document.querySelector('#address').value = `${markerLat}, ${markerLng}`;
 });
 
-//добавляем группу синих маркеров по нашим данным
+
 const markerGroup = L.layerGroup().addTo(mapBooking);
 
 const createMarkerAd = (item) => {
@@ -74,57 +67,4 @@ const createMarkerAd = (item) => {
     .bindPopup(createCard(item));
 };
 
-/*SIMILAR_ADS.slice(0, 10).forEach((item)=>{
-  createMarkerAd(item, markerGroup);
-});*/
-
-
-//добавляем фильтрацию синих маркеров по параметрам
-
-
-/*document.querySelector('.map__filters').addEventListener('change', () => {
-  markerGroup.clearLayers();
-
-  const newAdsFilter = SIMILAR_ADS.filter((item) => (
-    getFilterItems('type', item)
-    && getFilterItems('rooms', item)
-    && getFilterItems('guests', item)
-    && getPrice(item['offer']['price'], document.querySelector('#housing-price').value)
-    && getFeatures(item['offer']['features'])
-  ),
-  );
-
-  newAdsFilter.slice(0, 10).forEach((item) => {
-    createMarkerAd(item, markerGroup);
-  });
-});*/
-
-
-//добавляем скрытие объявления и возвращение к начальным координатам при клике на reset
-const resetMainPing = function () {
-  marker.setLatLng(
-    {
-      lat:35.68172,
-      lng:139.75392,
-    },
-  );
-};
-
-const resetMapView = function () {
-  mapBooking.setView(
-    {
-      lat:35.68172,
-      lng:139.75392,
-    },
-    12,
-  );
-};
-
-document.querySelector('.ad-form__reset').addEventListener('click', resetMainPing);
-document.querySelector('.ad-form__reset').addEventListener('click', resetMapView);
-
-document.querySelector('.ad-form__reset').addEventListener('click', ()=>{
-  if (document.querySelector('.leaflet-popup')){document.querySelector('.leaflet-popup').remove();}
-});
-
-export {mapBooking, resetMainPing, resetMapView, markerGroup, createMarkerAd};
+export {marker, mapBooking, markerGroup, createMarkerAd};

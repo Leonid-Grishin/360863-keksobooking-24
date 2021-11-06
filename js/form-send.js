@@ -1,5 +1,7 @@
-import {resetMainPing, resetMapView} from './map.js';
-import {sendData} from './api.js';
+import {resetMainPing, resetMapView} from './reset.js';
+import {getData, sendData} from './api.js';
+import {filterAds} from './map-filter.js';
+import {showAlert} from './util.js';
 
 const formAd = document.querySelector('.ad-form');
 const modalSuccess = document.querySelector('#success').content.cloneNode(true);
@@ -13,6 +15,8 @@ const addEscListener = function (evt) {
       document.querySelector('.ad-form').reset();
       resetMainPing();
       resetMapView();
+      document.querySelector('.map__filters').reset();
+      getData('https://24.javascript.pages.academy/keksobooking/data', filterAds, showAlert);
     }
     if (document.querySelector('.leaflet-popup')){document.querySelector('.leaflet-popup').remove();}
   }
@@ -24,6 +28,8 @@ const addClickListener = function (){
     document.querySelector('.ad-form').reset();
     resetMainPing();
     resetMapView();
+    document.querySelector('.map__filters').reset();
+    getData('https://24.javascript.pages.academy/keksobooking/data', filterAds, showAlert);
   }
   if (document.querySelector('.leaflet-popup')){document.querySelector('.leaflet-popup').remove();}
 };
@@ -46,8 +52,9 @@ const showFail = function () {
 const sendForm = () => {
   formAd.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    sendData(showSuccess, showFail, new FormData(evt.target));
+    sendData('https://24.javascript.pages.academy/keksobookingff', showSuccess, showFail, new FormData(evt.target));
   });
 };
+
 
 export {sendForm};

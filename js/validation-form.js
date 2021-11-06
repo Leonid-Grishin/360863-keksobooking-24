@@ -68,22 +68,3 @@ changeTime('#timein', '#timeout');
 changeTime('#timeout', '#timein');
 
 
-/*const validateForm = function (){
-  //evt.preventDefault();
-  if (formAd.checkValidity()){
-
-    document.body.appendChild(modalSuccess);
-
-
-  } else {
-    const modalError = document.querySelector('#error').content.cloneNode(true);
-    document.body.appendChild(modalError);
-    document.querySelector('.error__button').addEventListener('click', addClickListener);
-  }
-  document.addEventListener('keydown', addEscListener);
-  document.body.children[document.body.children.length-1].addEventListener('click', addClickListener);
-
-};
-
-formAd.addEventListener('submit', validateForm);*/
-
