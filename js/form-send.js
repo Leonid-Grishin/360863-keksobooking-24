@@ -11,7 +11,7 @@ const addEscListener = function (evt) {
     evt.preventDefault();
     document.body.children[document.body.children.length-1].remove();
     document.removeEventListener('keydown', addEscListener);
-    if (modalSuccess){
+    if (document.body.children[document.body.children.length-1] === modalSuccess){
       document.querySelector('.ad-form').reset();
       resetMainPing();
       resetMapView();
@@ -24,7 +24,7 @@ const addEscListener = function (evt) {
 const addClickListener = function (){
   document.body.children[document.body.children.length-1].remove();
   document.removeEventListener('keydown', addEscListener);
-  if (modalSuccess){
+  if (document.body.children[document.body.children.length-1] === modalSuccess){
     document.querySelector('.ad-form').reset();
     resetMainPing();
     resetMapView();
@@ -52,7 +52,7 @@ const showFail = function () {
 const sendForm = () => {
   formAd.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    sendData('https://24.javascript.pages.academy/keksobookingff', showSuccess, showFail, new FormData(evt.target));
+    sendData('https://24.javascript.pages.academy/keksobooking', showSuccess, showFail, new FormData(evt.target));
   });
 };
 

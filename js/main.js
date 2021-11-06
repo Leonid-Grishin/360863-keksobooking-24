@@ -6,5 +6,3 @@ import {showAlert} from './util.js';
 
 sendForm();
 getData('https://24.javascript.pages.academy/keksobooking/data', filterAds, showAlert);
-
-
