@@ -9,9 +9,9 @@ const modalSuccess = document.querySelector('#success').content.cloneNode(true);
 const addEscListener = function (evt) {
   if (evt.key === 'Escape' || evt.key === 'Esc') {
     evt.preventDefault();
-    document.body.children[document.body.children.length-1].remove();
+
     document.removeEventListener('keydown', addEscListener);
-    if (document.body.children[document.body.children.length-1] === modalSuccess){
+    if (document.body.children[document.body.children.length-1] === document.querySelector('.success')){
       document.querySelector('.ad-form').reset();
       resetMainPing();
       resetMapView();
@@ -19,12 +19,13 @@ const addEscListener = function (evt) {
       getData('https://24.javascript.pages.academy/keksobooking/data', filterAds, showAlert);
     }
     if (document.querySelector('.leaflet-popup')){document.querySelector('.leaflet-popup').remove();}
+    document.body.children[document.body.children.length-1].remove();
   }
 };
 const addClickListener = function (){
-  document.body.children[document.body.children.length-1].remove();
+
   document.removeEventListener('keydown', addEscListener);
-  if (document.body.children[document.body.children.length-1] === modalSuccess){
+  if (document.body.children[document.body.children.length-1] === document.querySelector('.success')){
     document.querySelector('.ad-form').reset();
     resetMainPing();
     resetMapView();
@@ -32,6 +33,7 @@ const addClickListener = function (){
     getData('https://24.javascript.pages.academy/keksobooking/data', filterAds, showAlert);
   }
   if (document.querySelector('.leaflet-popup')){document.querySelector('.leaflet-popup').remove();}
+  document.body.children[document.body.children.length-1].remove();
 };
 
 
@@ -52,7 +54,7 @@ const showFail = function () {
 const sendForm = () => {
   formAd.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    sendData('https://24.javascript.pages.academy/keksobooking', showSuccess, showFail, new FormData(evt.target));
+    sendData('https://24.javascript.pages.academy/keksobookingD', showSuccess, showFail, new FormData(evt.target));
   });
 };
 
