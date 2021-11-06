@@ -1,3 +1,5 @@
+import {makeForm} from './activation-form.js';
+
 const getData = (url, onSuccess, onFail) => {
   fetch (url)
     .then((response) => {
@@ -9,10 +11,10 @@ const getData = (url, onSuccess, onFail) => {
     .then((response) => response.json())
     .then((data) => {
       onSuccess(data);
-      document.querySelector('.map__filters').addEventListener('change', () => onSuccess(data));
     })
     .catch(() => {
       onFail('данные не загрузились');
+      makeForm('add', 'setAttribute','map__filters', 'ad-form--disabled', 'disabled', 'disabled');
     });
 
 };

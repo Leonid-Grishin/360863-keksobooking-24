@@ -1,4 +1,6 @@
 import {createMarkerAd, markerGroup} from './map.js';
+import {getData} from './api.js';
+import {showAlert} from './util.js';
 
 const getFilterItems = function (selector, item){
   if (document.querySelector(`#housing-${selector}`).value === 'any'){
@@ -37,5 +39,6 @@ const filterAds = (data) => {
     .forEach((item) => createMarkerAd(item));
 };
 
+document.querySelector('.map__filters').addEventListener('change', () => getData('https://24.javascript.pages.academy/keksobooking/data', filterAds, showAlert));
 export {filterAds};
 

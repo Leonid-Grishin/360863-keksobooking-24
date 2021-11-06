@@ -17,5 +17,5 @@ const activateForm = () => {
 
 deactivateForm();
 
-export {deactivateForm, activateForm};
+export {deactivateForm, activateForm, makeForm};
 
