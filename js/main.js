@@ -5,4 +5,12 @@ import {filterAds} from './map-filter.js';
 import {showAlert} from './util.js';
 
 sendForm();
-getData('https://24.javascript.pages.academy/keksobooking/data', filterAds, showAlert);
+getData(
+  'https://24.javascript.pages.academy/keksobooking/data',
+  (data) => {
+    filterAds(data);
+    document.querySelector('.map__filters').addEventListener('change', () => filterAds(data));
+  },
+  showAlert);
+
+
