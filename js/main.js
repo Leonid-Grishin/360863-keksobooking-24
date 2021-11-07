@@ -1,16 +1,16 @@
-import {SIMILAR_ADS} from './data.js';
-//import {MAP} from './ad-template.js';
-//import {deactivateForm, activateForm} from './activation-form.js';
 import './validation-form.js';
+import {sendForm} from './form-send.js';
+import {getData} from './api.js';
+import {filterAds} from './map-filter.js';
+import {showAlert} from './util.js';
 
-//eslint-disable-next-line no-console
-console.info(SIMILAR_ADS);
+sendForm();
+getData(
+  'https://24.javascript.pages.academy/keksobooking/data',
+  (data) => {
+    filterAds(data);
+    document.querySelector('.map__filters').addEventListener('change', () => filterAds(data));
+  },
+  showAlert);
 
-//eslint-disable-next-line no-console
-//console.info(MAP);
 
-//eslint-disable-next-line no-console
-//console.info(deactivateForm);
-
-//eslint-disable-next-line no-console
-//console.info(activateForm);
