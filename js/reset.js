@@ -3,6 +3,8 @@ import {getData} from './api.js';
 import {filterAds} from './map-filter.js';
 import {showAlert} from './util.js';
 
+const leafletPopup = document.querySelector('.leaflet-popup');
+
 const resetMainPing = function () {
   marker.setLatLng(
     {
@@ -27,7 +29,7 @@ resetButton.addEventListener('click', resetMapView);
 resetButton.addEventListener('click', ()=>{document.querySelector('#price').placeholder = 'от 1000';});
 
 resetButton.addEventListener('click', ()=>{
-  if (document.querySelector('.leaflet-popup')){document.querySelector('.leaflet-popup').remove();}
+  if (leafletPopup){leafletPopup.remove();}
 });
 
 resetButton.addEventListener('click', ()=>{

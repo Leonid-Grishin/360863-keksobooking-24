@@ -1,4 +1,5 @@
 import {createMarkerAd, markerGroup} from './map.js';
+const MAX_COUNT_ADS = 10;
 
 const getFilterItems = function (selector, item){
   if (document.querySelector(`#housing-${selector}`).value === 'any'){
@@ -46,7 +47,7 @@ const filterAds = (data) => {
     )
     .slice()
     .sort(compareAds)
-    .slice(0, 10)
+    .slice(0, MAX_COUNT_ADS)
     .forEach((item) => createMarkerAd(item));
 };
 
