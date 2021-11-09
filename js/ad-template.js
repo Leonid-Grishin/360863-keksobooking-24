@@ -40,7 +40,7 @@ const fillSeveralElements = (parent, selector, prop = 'src', data, isCondition =
     parent.querySelector(selector).innerHTML = '';
     parent.querySelector(selector).append(listsFragment);
   } else {
-    parent.querySelector(selector).setAttribute('hidden', true);}
+    parent.querySelector(selector).innerHTML = '';}
 };
 
 
