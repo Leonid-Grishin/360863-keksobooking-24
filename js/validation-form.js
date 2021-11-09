@@ -22,7 +22,7 @@ priceInput.addEventListener('input', () => {
   priceInput.reportValidity();
 });
 
-const ROOMS_GUEST_DEPENDENCE = {
+const roomsGuestDependence = {
   1 : [1],
   2 : [1, 2],
   3 : [1, 2, 3],
@@ -34,7 +34,7 @@ const changeGuests = function (evt) {
     item.disabled = true;
   });
 
-  ROOMS_GUEST_DEPENDENCE[evt.target.value].forEach((item) => {
+  roomsGuestDependence[evt.target.value].forEach((item) => {
     document.querySelector('#capacity').querySelector(`option[value='${item}']`).disabled = false;
     document.querySelector('#capacity').value = item;
   });
@@ -44,7 +44,8 @@ roomsInput.addEventListener('change', changeGuests);
 
 
 const typeHouseInput = document.querySelector('#type');
-const TYPE_HOUSE_PRICE_DEPENDENCE = {
+
+const typeHousePriceDependence = {
   'bungalow' : 0,
   'flat' : 1000,
   'hotel' : 3000,
@@ -53,8 +54,8 @@ const TYPE_HOUSE_PRICE_DEPENDENCE = {
 };
 
 const changeMinPrice = function (evt){
-  document.querySelector('#price').min = TYPE_HOUSE_PRICE_DEPENDENCE[evt.target.value];
-  document.querySelector('#price').placeholder = `от ${TYPE_HOUSE_PRICE_DEPENDENCE[evt.target.value]}`;
+  document.querySelector('#price').min = typeHousePriceDependence[evt.target.value];
+  document.querySelector('#price').placeholder = `от ${typeHousePriceDependence[evt.target.value]}`;
 };
 
 typeHouseInput.addEventListener('change', changeMinPrice);

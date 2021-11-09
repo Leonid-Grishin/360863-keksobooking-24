@@ -2,8 +2,7 @@ const similarAdsTemplate = document.querySelector('#card')
   .content
   .querySelector('.popup');
 
-
-const HOUSE_TYPES = {
+const houseTypes = {
   flat: 'Квартира ',
   bungalow: 'Бунгало',
   house: 'Дом',
@@ -55,7 +54,7 @@ const createCard = (data) => {
   fillElement(adTemplate, '.popup__text--time', 'textContent', `Заезд после ${data.offer.checkin}, выезд до ${data.offer.checkout}`, data.offer.checkin && data.offer.checkout !== undefined);
   fillElement(adTemplate, '.popup__description', 'textContent', data.offer.description, data.offer.description !== undefined);
   fillElement(adTemplate, '.popup__avatar', 'src', data.author.avatar, data.author.avatar !== undefined);
-  fillElement(adTemplate, '.popup__type', 'textContent', HOUSE_TYPES[data.offer.type], data.offer.type !== undefined);
+  fillElement(adTemplate, '.popup__type', 'textContent', houseTypes[data.offer.type], data.offer.type !== undefined);
   fillSeveralElements(adTemplate, '.popup__photos', 'src', data.offer.photos, data.offer.photos !== undefined);
   fillSeveralElements(adTemplate, '.popup__features', false, data.offer.features, data.offer.features !== undefined);
 
