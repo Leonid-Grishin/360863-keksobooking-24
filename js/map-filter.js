@@ -25,8 +25,8 @@ const getFeatures = function (offer){
 
 const getAdsRank = (data) => {
   let rank;
-  if(data['offer']['features'] === undefined){rank = 0;}
-  if(data['offer']['features'] !== undefined){rank = data['offer']['features'].length;}
+  if(data.offer.features === undefined){rank = 0;}
+  if(data.offer.features !== undefined){rank = data.offer.features.length;}
   return rank;
 };
 
@@ -49,7 +49,7 @@ const filterAds = (data) => {
     )
     .slice()
     .sort(compareAds)
-    .slice(0, 10)
+    .slice(0, 20)
     .forEach((item) => createMarkerAd(item));
 };
 

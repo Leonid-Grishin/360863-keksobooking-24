@@ -1,4 +1,4 @@
-import {makeForm} from './activation-form.js';
+import {changeFormActivity} from './activation-form.js';
 import './validation-form.js';
 import {sendForm} from './form-send.js';
 import {getData} from './api.js';
@@ -13,7 +13,7 @@ getData(
   (data) => {
     filterAds(data);
     document.querySelector('.map__filters').addEventListener('change', debounce(() => filterAds(data)));
-    makeForm('remove', 'removeAttribute','map__filters', 'ad-form--disabled', 'disabled');
-    //console.log(data[2]['offer']['features'].length);
+    changeFormActivity('remove', 'removeAttribute','map__filters', 'ad-form--disabled', 'disabled');
   },
   showAlert);
+

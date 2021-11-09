@@ -21,10 +21,10 @@ const resetMapView = function () {
     12,
   );
 };
-
 const resetButton = document.querySelector('.ad-form__reset');
 resetButton.addEventListener('click', resetMainPing);
 resetButton.addEventListener('click', resetMapView);
+resetButton.addEventListener('click', ()=>{document.querySelector('#price').placeholder = 'от 1000';});
 
 resetButton.addEventListener('click', ()=>{
   if (document.querySelector('.leaflet-popup')){document.querySelector('.leaflet-popup').remove();}

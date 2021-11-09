@@ -1,4 +1,4 @@
-import {makeForm} from './activation-form.js';
+import {changeFormActivity} from './activation-form.js';
 
 const getData = (url, onSuccess, onFail) => {
   fetch (url)
@@ -14,11 +14,10 @@ const getData = (url, onSuccess, onFail) => {
     })
     .catch(() => {
       onFail('данные не загрузились');
-      makeForm('add', 'setAttribute','map__filters', 'ad-form--disabled', 'disabled', 'disabled');
+      changeFormActivity('add', 'setAttribute','map__filters', 'ad-form--disabled', 'disabled', 'disabled');
     });
 
 };
-
 
 const sendData = (url, onSuccess, onFail, body) => {
   fetch(
