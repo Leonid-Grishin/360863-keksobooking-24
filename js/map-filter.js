@@ -49,7 +49,7 @@ const filterAds = (data) => {
     )
     .slice()
     .sort(compareAds)
-    .slice(0, 20)
+    .slice(0, 10)
     .forEach((item) => createMarkerAd(item));
 };
 
