@@ -23,6 +23,20 @@ const getFeatures = function (offer){
 
 };
 
+const getAdsRank = (data) => {
+  let rank;
+  if(data['offer']['features'] === undefined){rank = 0;}
+  if(data['offer']['features'] !== undefined){rank = data['offer']['features'].length;}
+  return rank;
+};
+
+const compareAds = (AdsA, AdsB) => {
+  const rankA = getAdsRank(AdsA);
+  const rankB = getAdsRank(AdsB);
+
+  return rankA - rankB;
+};
+
 const filterAds = (data) => {
   markerGroup.clearLayers();
   data
@@ -33,6 +47,8 @@ const filterAds = (data) => {
           getPrice(item.offer.price, document.querySelector('#housing-price').value) &&
           getFeatures(item.offer.features),
     )
+    .slice()
+    .sort(compareAds)
     .slice(0, 10)
     .forEach((item) => createMarkerAd(item));
 };

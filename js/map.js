@@ -1,7 +1,7 @@
 import {activateForm} from './activation-form.js';
 import {createCard} from './ad-template.js';
 
-
+//makeForm('add', 'setAttribute','map__filters', 'ad-form--disabled', 'disabled', 'disabled');
 const mapBooking = L.map('map-canvas');
 
 mapBooking.on('load', () => {

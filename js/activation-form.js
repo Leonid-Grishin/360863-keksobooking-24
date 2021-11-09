@@ -12,10 +12,11 @@ const deactivateForm = () => {
 
 const activateForm = () => {
   makeForm('remove', 'removeAttribute', 'ad-form', 'ad-form--disabled', 'disabled');
-  makeForm('remove', 'removeAttribute','map__filters', 'ad-form--disabled', 'disabled');
+  //makeForm('remove', 'removeAttribute','map__filters', 'ad-form--disabled', 'disabled');
 };
 
 deactivateForm();
+
 
 export {deactivateForm, activateForm, makeForm};
 
