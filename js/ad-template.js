@@ -1,7 +1,3 @@
-const similarAdsTemplate = document.querySelector('#card')
-  .content
-  .querySelector('.popup');
-
 const houseTypes = {
   flat: 'Квартира ',
   bungalow: 'Бунгало',
@@ -9,6 +5,10 @@ const houseTypes = {
   palace: 'Дворец',
   hotel: 'Отель',
 };
+
+const similarAdsTemplate = document.querySelector('#card')
+  .content
+  .querySelector('.popup');
 
 const fillElement = (parent, selector, prop, data, isCondition = true) => {
   const elem = parent.querySelector(selector);

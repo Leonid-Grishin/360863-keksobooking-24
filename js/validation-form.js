@@ -1,3 +1,18 @@
+const roomsGuestDependence = {
+  1 : [1],
+  2 : [1, 2],
+  3 : [1, 2, 3],
+  100 : [0],
+};
+
+const typeHousePriceDependence = {
+  'bungalow' : 0,
+  'flat' : 1000,
+  'hotel' : 3000,
+  'house' : 5000,
+  'palace' : 10000,
+};
+
 const titleInput = document.querySelector('#title');
 titleInput.addEventListener('input', () => {
   const MIN_TITLE_LENGTH = 30;
@@ -22,12 +37,6 @@ priceInput.addEventListener('input', () => {
   priceInput.reportValidity();
 });
 
-const roomsGuestDependence = {
-  1 : [1],
-  2 : [1, 2],
-  3 : [1, 2, 3],
-  100 : [0],
-};
 const roomsInput = document.querySelector('#room_number');
 const changeGuests = function (evt) {
   document.querySelector('#capacity').querySelectorAll('option').forEach((item)=>{
@@ -44,14 +53,6 @@ roomsInput.addEventListener('change', changeGuests);
 
 
 const typeHouseInput = document.querySelector('#type');
-
-const typeHousePriceDependence = {
-  'bungalow' : 0,
-  'flat' : 1000,
-  'hotel' : 3000,
-  'house' : 5000,
-  'palace' : 10000,
-};
 
 const changeMinPrice = function (evt){
   document.querySelector('#price').min = typeHousePriceDependence[evt.target.value];

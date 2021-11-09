@@ -17,10 +17,8 @@ const getPrice = function (offer, value){
 };
 
 const getFeatures = function (offer){
-
   const featuresChecked = document.querySelectorAll('.map__checkbox:checked');
   return Array.from(featuresChecked).map((item) => item.value).every((elem) =>  offer && offer.includes(elem));
-
 };
 
 const getAdsRank = (data) => {
@@ -33,7 +31,6 @@ const getAdsRank = (data) => {
 const compareAds = (AdsA, AdsB) => {
   const rankA = getAdsRank(AdsA);
   const rankB = getAdsRank(AdsB);
-
   return rankA - rankB;
 };
 
