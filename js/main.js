@@ -5,6 +5,7 @@ import {getData} from './api.js';
 import {filterAds} from './map-filter.js';
 import {showAlert} from './util.js';
 import {debounce} from './utils/debounce.js';
+import './ad-photos.js';
 
 
 addSubmitListener();
