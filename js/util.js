@@ -1,3 +1,5 @@
+const ALERT_DURATION = 500;
+
 function getRandomIntInclusive(min, max) {
   min = (min < 0) ? 0 : Math.ceil(min);
   max = (max < 0) ? 0 : Math.floor(max);
@@ -34,7 +36,7 @@ const showAlert = (message) => {
 
   setTimeout(() => {
     alertContainer.remove();
-  }, 5000);
+  }, ALERT_DURATION);
 };
 
 export {getRandomIntInclusive, getRandomFloatInclusive, getUniqueElement, showAlert};

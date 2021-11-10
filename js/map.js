@@ -1,7 +1,6 @@
 import {activateForm} from './activation-form.js';
 import {createCard} from './ad-template.js';
 
-
 const mapBooking = L.map('map-canvas');
 
 mapBooking.on('load', () => {

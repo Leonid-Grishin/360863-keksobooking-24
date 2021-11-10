@@ -1,15 +1,14 @@
-const similarAdsTemplate = document.querySelector('#card')
-  .content
-  .querySelector('.popup');
-
-
-const HOUSETYPES = {
+const houseTypes = {
   flat: 'Квартира ',
   bungalow: 'Бунгало',
   house: 'Дом',
   palace: 'Дворец',
   hotel: 'Отель',
 };
+
+const similarAdsTemplate = document.querySelector('#card')
+  .content
+  .querySelector('.popup');
 
 const fillElement = (parent, selector, prop, data, isCondition = true) => {
   const elem = parent.querySelector(selector);
@@ -41,23 +40,23 @@ const fillSeveralElements = (parent, selector, prop = 'src', data, isCondition =
     parent.querySelector(selector).innerHTML = '';
     parent.querySelector(selector).append(listsFragment);
   } else {
-    parent.querySelector(selector).setAttribute('hidden', true);}
+    parent.querySelector(selector).innerHTML = '';}
 };
 
 
-const createCard = (adData) => {
+const createCard = (data) => {
   const adTemplate = similarAdsTemplate.cloneNode(true);
 
-  fillElement(adTemplate, '.popup__title', 'textContent', adData.offer.title, adData.offer.title !== undefined);
-  fillElement(adTemplate, '.popup__text--address', 'textContent', adData.offer.address, adData.offer.address !== undefined);
-  fillElement(adTemplate, '.popup__text--price', 'textContent', `${adData.offer.price} ₽/ночь`, adData.offer.price !== undefined);
-  fillElement(adTemplate, '.popup__text--capacity', 'textContent', `${adData.offer.rooms} комнаты для ${adData.offer.guests} гостей`, adData.offer.rooms && adData.offer.guests !== undefined);
-  fillElement(adTemplate, '.popup__text--time', 'textContent', `Заезд после ${adData.offer.checkin}, выезд до ${adData.offer.checkout}`, adData.offer.checkin && adData.offer.checkout !== undefined);
-  fillElement(adTemplate, '.popup__description', 'textContent', adData.offer.description, adData.offer.description !== undefined);
-  fillElement(adTemplate, '.popup__avatar', 'src', adData.author.avatar, adData.author.avatar !== undefined);
-  fillElement(adTemplate, '.popup__type', 'textContent', HOUSETYPES[adData.offer.type], adData.offer.type !== undefined);
-  fillSeveralElements(adTemplate, '.popup__photos', 'src', adData.offer.photos, adData.offer.photos !== undefined);
-  fillSeveralElements(adTemplate, '.popup__features', false, adData.offer.features, adData.offer.features !== undefined);
+  fillElement(adTemplate, '.popup__title', 'textContent', data.offer.title, data.offer.title !== undefined);
+  fillElement(adTemplate, '.popup__text--address', 'textContent', data.offer.address, data.offer.address !== undefined);
+  fillElement(adTemplate, '.popup__text--price', 'textContent', `${data.offer.price} ₽/ночь`, data.offer.price !== undefined);
+  fillElement(adTemplate, '.popup__text--capacity', 'textContent', `${data.offer.rooms} комнаты для ${data.offer.guests} гостей`, data.offer.rooms && data.offer.guests !== undefined);
+  fillElement(adTemplate, '.popup__text--time', 'textContent', `Заезд после ${data.offer.checkin}, выезд до ${data.offer.checkout}`, data.offer.checkin && data.offer.checkout !== undefined);
+  fillElement(adTemplate, '.popup__description', 'textContent', data.offer.description, data.offer.description !== undefined);
+  fillElement(adTemplate, '.popup__avatar', 'src', data.author.avatar, data.author.avatar !== undefined);
+  fillElement(adTemplate, '.popup__type', 'textContent', houseTypes[data.offer.type], data.offer.type !== undefined);
+  fillSeveralElements(adTemplate, '.popup__photos', 'src', data.offer.photos, data.offer.photos !== undefined);
+  fillSeveralElements(adTemplate, '.popup__features', false, data.offer.features, data.offer.features !== undefined);
 
   return adTemplate;
 };
