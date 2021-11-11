@@ -2,6 +2,7 @@ import {resetMainPing, resetMapView} from './reset.js';
 import {getData, sendData} from './api.js';
 import {filterAds} from './map-filter.js';
 import {showAlert} from './util.js';
+import './ad-photos.js';
 
 const formAd = document.querySelector('.ad-form');
 
@@ -16,6 +17,8 @@ const addCloseListener = function (evt) {
     document.querySelector('.map__filters').reset();
     getData('https://24.javascript.pages.academy/keksobooking/data', filterAds, showAlert);
     document.querySelector('.success').remove();
+    document.querySelector('.ad-form-header__preview').childNodes[1].src = 'img/muffin-grey.svg';
+    if (document.querySelector('.image__preview')){document.querySelector('.image__preview').remove();}
   }
   if (document.querySelector('.leaflet-popup')){document.querySelector('.leaflet-popup').remove();}
   if (document.body.children[document.body.children.length-1] === document.querySelector('.error')) {document.querySelector('.error').remove();}

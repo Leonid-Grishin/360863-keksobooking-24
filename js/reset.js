@@ -27,6 +27,7 @@ const resetButton = document.querySelector('.ad-form__reset');
 resetButton.addEventListener('click', resetMainPing);
 resetButton.addEventListener('click', resetMapView);
 resetButton.addEventListener('click', ()=>{document.querySelector('#price').placeholder = 'от 1000';});
+resetButton.addEventListener('click', ()=>{document.querySelector('.ad-form-header__preview').childNodes[1].src = 'img/muffin-grey.svg';});
 
 resetButton.addEventListener('click', ()=>{
   if (leafletPopup){leafletPopup.remove();}
