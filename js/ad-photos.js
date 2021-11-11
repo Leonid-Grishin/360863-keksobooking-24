@@ -14,10 +14,10 @@ avatarInput.addEventListener('change', ()=>{
 });
 
 const imagePreview = document.createElement('img');
-imagePreview.classList.add('image__preview');
-document.querySelector('.ad-form__photo').appendChild(imagePreview);
+
 
 const addImagePreviewListener = () => {
+
   const removeImagePreview = () => {
     imagePreview.remove();
     document.querySelector('.ad-form__reset').removeEventListener('click', removeImagePreview);
@@ -26,6 +26,8 @@ const addImagePreviewListener = () => {
 };
 
 imagesInput.addEventListener('change', ()=> {
+  imagePreview.classList.add('image__preview');
+  document.querySelector('.ad-form__photo').appendChild(imagePreview);
   const imageFile = imagesInput.files[0];
   const imageFileName = imageFile.name.toLowerCase();
   const matches = FILE_TYPES.some((it) => imageFileName.endsWith(it));
