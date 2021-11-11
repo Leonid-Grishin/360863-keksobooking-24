@@ -1,7 +1,7 @@
 const avatarInput = document.querySelector('.ad-form-header__input');
 const avatarPreview = document.querySelector('.ad-form-header__preview').childNodes[1];
 const imagesInput = document.querySelector('.ad-form__input');
-const FILE_TYPES = ['jpeg', 'png'];
+const FILE_TYPES = ['jpeg', 'png', 'jpg'];
 
 avatarInput.addEventListener('change', ()=>{
   const avatarFile = avatarInput.files[0];
