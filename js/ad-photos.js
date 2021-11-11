@@ -1,3 +1,5 @@
+import {showAlert} from './util.js';
+
 const avatarInput = document.querySelector('.ad-form-header__input');
 const avatarPreview = document.querySelector('.ad-form-header__preview').childNodes[1];
 const imagesInput = document.querySelector('.ad-form__input');
@@ -10,6 +12,8 @@ avatarInput.addEventListener('change', ()=>{
 
   if (matches) {
     avatarPreview.src = URL.createObjectURL(avatarFile);
+  } else if (!matches) {
+    showAlert('загрузите формат изображения png, jpg, или jpeg');
   }
 });
 
@@ -36,6 +40,8 @@ imagesInput.addEventListener('change', ()=> {
     imagePreview.height = 69;
     imagePreview.src = URL.createObjectURL(imageFile);
     addImagePreviewListener();
+  } else if (!matches) {
+    showAlert('загрузите формат изображения png, jpg, или jpeg');
   }
 });
 

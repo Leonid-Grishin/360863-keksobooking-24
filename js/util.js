@@ -1,4 +1,4 @@
-const ALERT_DURATION = 500;
+const ALERT_DURATION = 5000;
 
 function getRandomIntInclusive(min, max) {
   min = (min < 0) ? 0 : Math.ceil(min);
