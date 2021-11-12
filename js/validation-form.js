@@ -18,8 +18,31 @@ const typeHousePriceDependence = {
 
 const capacityInput = document.querySelector('#capacity');
 const priceInput = document.querySelector('#price');
-
 const titleInput = document.querySelector('#title');
+const roomsInput = document.querySelector('#room_number');
+const typeHouseInput = document.querySelector('#type');
+
+const changeGuests = function (evt) {
+  capacityInput.querySelectorAll('option').forEach((item)=>{
+    item.disabled = true;
+  });
+  roomsGuestDependence[evt.target.value].forEach((item) => {
+    capacityInput.querySelector(`option[value='${item}']`).disabled = false;
+    capacityInput.value = item;
+  });
+};
+
+const changeMinPrice = function (evt){
+  priceInput.min = typeHousePriceDependence[evt.target.value];
+  priceInput.placeholder = `от ${typeHousePriceDependence[evt.target.value]}`;
+};
+
+const changeTime = function (mainSelector, dependSelector) {
+  document.querySelector(mainSelector).addEventListener(
+    'change', (evt) => document.querySelector(dependSelector).value = evt.target.value,
+  );
+};
+
 titleInput.addEventListener('input', () => {
   if (titleInput.value.length < MIN_TITLE_LENGTH){
     titleInput.setCustomValidity(`Еще минимум ${MIN_TITLE_LENGTH-titleInput.value.length} символов`);
@@ -40,34 +63,10 @@ priceInput.addEventListener('input', () => {
   priceInput.reportValidity();
 });
 
-const roomsInput = document.querySelector('#room_number');
-const changeGuests = function (evt) {
-  capacityInput.querySelectorAll('option').forEach((item)=>{
-    item.disabled = true;
-  });
-
-  roomsGuestDependence[evt.target.value].forEach((item) => {
-    capacityInput.querySelector(`option[value='${item}']`).disabled = false;
-    capacityInput.value = item;
-  });
-};
-
 roomsInput.addEventListener('change', changeGuests);
-
-const typeHouseInput = document.querySelector('#type');
-
-const changeMinPrice = function (evt){
-  priceInput.min = typeHousePriceDependence[evt.target.value];
-  priceInput.placeholder = `от ${typeHousePriceDependence[evt.target.value]}`;
-};
 
 typeHouseInput.addEventListener('change', changeMinPrice);
 
-const changeTime = function (mainSelector, dependSelector) {
-  document.querySelector(mainSelector).addEventListener(
-    'change', (evt) => document.querySelector(dependSelector).value = evt.target.value,
-  );
-};
 changeTime('#timein', '#timeout');
 changeTime('#timeout', '#timein');
 
