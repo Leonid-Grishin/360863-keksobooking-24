@@ -1,13 +1,12 @@
 import {createMarkerAd, markerGroup} from './map.js';
-const MAX_COUNT_ADS = 10;
 
 const getFilterItems = function (selector, item){
-  if (document.querySelector(`#housing-${selector}`).value === 'any'){
+  if (document.querySelector(`#housing-${selector}`).value === 'any' ){
     return ' ';
   } else if (Number.isInteger(item.offer[selector])){
     return item.offer[selector] === +document.querySelector(`#housing-${selector}`).value;
-  }
-  return item.offer[selector] === document.querySelector(`#housing-${selector}`).value;
+  } else if(item.offer[selector]){return item.offer[selector] === document.querySelector(`#housing-${selector}`).value;}
+
 };
 
 const getPrice = function (offer, value){
@@ -37,19 +36,23 @@ const compareAds = (AdsA, AdsB) => {
 
 const filterAds = (data) => {
   markerGroup.clearLayers();
-  data
-    .filter((item) =>
-      getFilterItems('type', item) &&
-          getFilterItems('rooms', item) &&
-          getFilterItems('guests', item) &&
-          getPrice(item.offer.price, document.querySelector('#housing-price').value) &&
-          getFeatures(item.offer.features),
-    )
+  const shownAds = [];
+  for (let i = 0; i <= data.length; i++){
+    if (getFilterItems('type', data[i]) &&
+      getFilterItems('rooms', data[i]) &&
+      getFilterItems('guests', data[i]) &&
+      getPrice(data[i].offer.price, document.querySelector('#housing-price').value) &&
+      getFeatures(data[i].offer.features)){
+      shownAds.push(data[i]);
+    }
+    if (shownAds.length === 10) {break;}
+  }
+  shownAds
     .slice()
     .sort(compareAds)
-    .slice(0, MAX_COUNT_ADS)
     .forEach((item) => createMarkerAd(item));
 };
 
 export {filterAds};
+
 
