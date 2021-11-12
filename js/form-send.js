@@ -44,7 +44,7 @@ const showFail = function () {
 const addSubmitListener = () => {
   formAd.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    sendData('https://24.javascript.pages.academy/keksobookings', showSuccess, showFail, new FormData(evt.target));
+    sendData('https://24.javascript.pages.academy/keksobooking', showSuccess, showFail, new FormData(evt.target));
   });
 };
 

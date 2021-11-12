@@ -1,12 +1,12 @@
 import {createMarkerAd, markerGroup} from './map.js';
 
 const getFilterItems = function (selector, item){
-  if (document.querySelector(`#housing-${selector}`).value === 'any' ){
+  if (document.querySelector(`#housing-${selector}`).value === 'any'){
     return ' ';
   } else if (Number.isInteger(item.offer[selector])){
     return item.offer[selector] === +document.querySelector(`#housing-${selector}`).value;
-  } else if(item.offer[selector]){return item.offer[selector] === document.querySelector(`#housing-${selector}`).value;}
-
+  }
+  return item.offer[selector] === document.querySelector(`#housing-${selector}`).value;
 };
 
 const getPrice = function (offer, value){
@@ -38,7 +38,7 @@ const filterAds = (data) => {
   markerGroup.clearLayers();
   const shownAds = [];
   for (let i = 0; i <= data.length; i++){
-    if (getFilterItems('type', data[i]) &&
+    if (data[i] && data[i].offer && getFilterItems('type', data[i]) &&
       getFilterItems('rooms', data[i]) &&
       getFilterItems('guests', data[i]) &&
       getPrice(data[i].offer.price, document.querySelector('#housing-price').value) &&
