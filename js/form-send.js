@@ -8,17 +8,16 @@ const formAd = document.querySelector('.ad-form');
 
 const addCloseListener = function () {
   if (document.body.children[document.body.children.length-1] === document.querySelector('.success')){
-    formAd.reset();
+    [formAd, document.querySelector('.map__filters')].forEach((item)=>(item.reset()));
+    [document.querySelector('.success'), document.querySelector('.image__preview'), document.querySelector('.leaflet-popup')].forEach((item)=>{if(item){item.remove();}});
     resetMainPing();
     resetMapView();
-    document.querySelector('.map__filters').reset();
     getData('https://24.javascript.pages.academy/keksobooking/data', filterAds, showAlert);
-    document.querySelector('.success').remove();
     document.querySelector('.ad-form-header__preview').childNodes[1].src = 'img/muffin-grey.svg';
-    if (document.querySelector('.image__preview')){document.querySelector('.image__preview').remove();}
   }
-  if (document.querySelector('.leaflet-popup')){document.querySelector('.leaflet-popup').remove();}
-  if (document.body.children[document.body.children.length-1] === document.querySelector('.error')) {document.querySelector('.error').remove();}
+  if (document.body.children[document.body.children.length-1] === document.querySelector('.error')) {
+    document.querySelector('.error').remove();
+  }
 };
 
 const addEscCloserListener = (evt) => {
@@ -45,7 +44,7 @@ const showFail = function () {
 const addSubmitListener = () => {
   formAd.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    sendData('https://24.javascript.pages.academy/keksobooking', showSuccess, showFail, new FormData(evt.target));
+    sendData('https://24.javascript.pages.academy/keksobookings', showSuccess, showFail, new FormData(evt.target));
   });
 };
 
