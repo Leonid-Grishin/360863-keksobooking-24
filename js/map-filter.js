@@ -1,4 +1,5 @@
 import {createMarkerAd, markerGroup} from './map.js';
+const MAX_COUNT_ADS = 10;
 
 const getFilterItems = function (selector, item){
   if (document.querySelector(`#housing-${selector}`).value === 'any'){
@@ -45,7 +46,7 @@ const filterAds = (data) => {
       getFeatures(data[i].offer.features)){
       shownAds.push(data[i]);
     }
-    if (shownAds.length === 10) {break;}
+    if (shownAds.length === MAX_COUNT_ADS) {break;}
   }
   shownAds
     .slice()
