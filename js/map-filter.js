@@ -37,19 +37,23 @@ const compareAds = (AdsA, AdsB) => {
 
 const filterAds = (data) => {
   markerGroup.clearLayers();
-  data
-    .filter((item) =>
-      getFilterItems('type', item) &&
-          getFilterItems('rooms', item) &&
-          getFilterItems('guests', item) &&
-          getPrice(item.offer.price, document.querySelector('#housing-price').value) &&
-          getFeatures(item.offer.features),
-    )
+  const shownAds = [];
+  for (let i = 0; i <= data.length; i++){
+    if (data[i] && data[i].offer && getFilterItems('type', data[i]) &&
+        getFilterItems('rooms', data[i]) &&
+        getFilterItems('guests', data[i]) &&
+        getPrice(data[i].offer.price, document.querySelector('#housing-price').value) &&
+        getFeatures(data[i].offer.features)){
+      shownAds.push(data[i]);
+    }
+    if (shownAds.length === MAX_COUNT_ADS) {break;}
+  }
+  shownAds
     .slice()
     .sort(compareAds)
-    .slice(0, MAX_COUNT_ADS)
     .forEach((item) => createMarkerAd(item));
 };
 
 export {filterAds};
+
 
